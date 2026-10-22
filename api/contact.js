@@ -106,7 +106,7 @@ export default async function handler(req, res) {
   const from = process.env.MAIL_FROM || `Arcada <${process.env.SMTP_USER}>`;
   const inbox = process.env.LEAD_INBOX || process.env.SMTP_USER;
   const host = String(req.headers['x-forwarded-host'] || req.headers.host || '');
-  const siteUrl = process.env.SITE_URL || (/^[a-z0-9.-]+.[a-z]{2,}$/i.test(host) ? `https://${host}` : '');
+  const siteUrl = process.env.SITE_URL || (/^[a-z0-9.-]+\.[a-z]{2,}$/i.test(host) ? `https://${host}` : '');
   const meta = { at: new Date().toLocaleString('ro-RO', { timeZone: 'Europe/Bucharest' }) };
 
   try {
