@@ -1,0 +1,647 @@
+<!doctype html>
+<html lang="ro">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Arcada · Consultanță imobiliară pentru cumpărători în Cluj-Napoca</title>
+  <meta name="description" content="Arcada lucrează doar pentru cumpărător: verificăm actele, starea reală și prețul apartamentului din Cluj-Napoca pe care vrei să-l cumperi, apoi negociem în numele tău.">
+  <meta name="theme-color" content="#EDEDE7">
+  <meta property="og:title" content="Arcada · Cineva care lucrează pentru cumpărător">
+  <meta property="og:description" content="Verificăm actele, starea și prețul apartamentului înainte să semnezi ceva. Cluj-Napoca.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="/img/cluj-acoperisuri-1600.webp">
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preload" href="/fonts/bricolage-grotesque/bricolage-grotesque-200-800-latin-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/bricolage-grotesque/bricolage-grotesque-200-800-latin-ext-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/src/styles.css">
+</head>
+<body>
+  <a class="skip" href="#continut">Sari la conținut</a>
+
+  <!-- Bara de sus: o ruletă de măsurat cu informații care rulează -->
+  <aside class="tape" aria-label="Pe scurt despre Arcada">
+    <div class="tape__viewport">
+      <ul class="tape__track" data-ticker>
+        <li>Lucrăm doar pentru cumpărător. Nu primim comision de la vânzător.</li>
+        <li>Extrasul de carte funciară, verificat înainte de orice avans.</li>
+        <li>Prima discuție: 30 de minute, gratuită, fără obligații.</li>
+        <li>Cluj-Napoca, Florești, Baciu, Apahida, Feleacu.</li>
+        <li>Tarif fix, comunicat în scris înainte să începem.</li>
+      </ul>
+    </div>
+    <button class="tape__toggle" type="button" aria-pressed="false" data-ticker-toggle>
+      <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-pause"></use></svg>
+      <span data-ticker-label>Oprește banda</span>
+    </button>
+  </aside>
+
+  <header class="nav" data-nav>
+    <div class="nav__inner wrap">
+      <a class="brand" href="#inceput" aria-label="Arcada, înapoi la început">
+        <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+          <path d="M4 36V18a16 16 0 0 1 32 0v18" fill="none" stroke="currentColor" stroke-width="3.2"/>
+          <path d="M12 36V19a8 8 0 0 1 16 0v17" fill="none" stroke="currentColor" stroke-width="3.2"/>
+          <rect x="17" y="3" width="6" height="6" fill="var(--tape)" stroke="currentColor" stroke-width="1.6"/>
+        </svg>
+        <span class="brand__word">Arcada</span>
+      </a>
+
+      <nav class="menu" id="meniu" aria-label="Meniu principal" data-menu>
+        <ul class="menu__list" data-bubble-nav>
+          <li><a href="#problema">Ce nu scrie în anunț</a></li>
+          <li><a href="#ce-verificam">Ce verificăm</a></li>
+          <li><a href="#cum-lucram">Cum lucrăm</a></li>
+          <li><a href="#intrebari">Întrebări</a></li>
+          <li class="menu__bubble" aria-hidden="true"></li>
+        </ul>
+        <a class="btn btn--tape menu__cta" href="#contact">Programează o consultație</a>
+      </nav>
+
+      <button class="nav__burger" type="button" aria-expanded="false" aria-controls="meniu" data-burger>
+        <span class="sr-only" data-burger-label>Deschide meniul</span>
+        <span class="burger" aria-hidden="true"><i></i><i></i></span>
+      </button>
+    </div>
+  </header>
+
+  <main id="continut">
+    <!-- 01 · Deschidere -->
+    <section class="hero" id="inceput" aria-labelledby="hero-titlu">
+      <div class="wrap hero__grid">
+        <div class="hero__copy">
+          <p class="eyebrow"><span class="eyebrow__num">00</span> Consultanță pentru cumpărători · Cluj-Napoca</p>
+          <h1 class="hero__title" id="hero-titlu">
+            <span class="line">Agentul din anunț</span>
+            <span class="line">lucrează pentru</span>
+            <span class="line">vânzător.</span>
+            <span class="line hero__title-us"><mark>Noi lucrăm pentru tine.</mark></span>
+          </h1>
+          <p class="hero__lead">
+            Arcada îți verifică actele, starea reală și prețul apartamentului pe care vrei să-l cumperi,
+            apoi negociază în numele tău. Ajungi la notar știind exact ce semnezi.
+          </p>
+          <div class="hero__actions">
+            <a class="btn btn--tape btn--lg" href="#contact">
+              Programează o consultație
+              <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-arrow-right"></use></svg>
+            </a>
+            <a class="link-arrow" href="#ce-verificam">Vezi ce verificăm</a>
+          </div>
+          <p class="hero__note">
+            <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-clock"></use></svg>
+            Prima discuție durează 30 de minute, e gratuită și nu te obligă la nimic.
+          </p>
+        </div>
+
+        <figure class="hero__media" data-reveal>
+          <div class="cote cote--v" aria-hidden="true"><span>h 2,60 m</span></div>
+          <div class="video-frame">
+            <video class="video" controls preload="none" playsinline
+                   poster="/video/vizionare-coperta.webp"
+                   width="720" height="1280"
+                   aria-describedby="video-descriere">
+              <source src="/video/vizionare.webm" type="video/webm">
+              <source src="/video/vizionare.mp4" type="video/mp4">
+              Browserul tău nu poate reda acest clip. <a href="/video/vizionare.mp4">Descarcă clipul (MP4, 1,7 MB)</a>.
+            </video>
+            <span class="video-frame__tag" aria-hidden="true">Fișa 00 · vizionare</span>
+          </div>
+          <figcaption class="hero__caption" id="video-descriere">
+            O vizionare cu listă de verificare: încăpere cu încăpere, notăm tot ce contează la preț. Clipul nu are sonor.
+          </figcaption>
+        </figure>
+      </div>
+
+      <ol class="wrap hero__index" aria-label="Pe scurt, ce facem">
+        <li><span>01</span> Verificăm actele</li>
+        <li><span>02</span> Venim la vizionare</li>
+        <li><span>03</span> Negociem prețul</li>
+        <li><span>04</span> Te însoțim la notar</li>
+      </ol>
+    </section>
+
+    <!-- 02 · Problema, amplificată -->
+    <section class="problem" id="problema" aria-labelledby="problema-titlu">
+      <div class="wrap problem__grid">
+        <header class="section-head section-head--light">
+          <p class="eyebrow"><span class="eyebrow__num">01</span> Ce nu scrie în anunț</p>
+          <h2 id="problema-titlu">Un anunț e scris ca să vândă.</h2>
+          <p class="section-head__lead">
+            Fotografiile sunt făcute în cea mai bună lumină, iar agentul vânzătorului e plătit când prețul e cât mai mare.
+            Problemele apar de obicei după ce ai dat avansul.
+          </p>
+        </header>
+
+        <figure class="problem__photo" data-reveal>
+          <picture>
+            <source type="image/webp" srcset="/img/hol-balcon-800.webp 800w, /img/hol-balcon-1600.webp 1600w" sizes="(min-width: 960px) 34vw, 92vw">
+            <img src="/img/hol-balcon-800.webp" width="800" height="1200" loading="lazy" decoding="async"
+                 alt="Hol îngust și întunecat al unui apartament, cu o ușă de balcon luminată la capăt.">
+          </picture>
+          <figcaption><span class="mono">Fig. 1</span> În anunț se vede lumina de la capătul holului. Noi ne uităm și la pereți.</figcaption>
+        </figure>
+
+        <ol class="risks">
+          <li class="risk" data-reveal>
+            <span class="risk__num">01</span>
+            <h3>Sarcini în cartea funciară</h3>
+            <p>O ipotecă sau un sechestru despre care anunțul nu spune nimic poate bloca semnarea la notar, după ce ai plătit deja avansul.</p>
+          </li>
+          <li class="risk" data-reveal>
+            <span class="risk__num">02</span>
+            <h3>Metri pătrați care nu există în acte</h3>
+            <p>Balconul închis sau mansarda amenajată fără autorizație se plătesc ca suprafață utilă, dar nu apar în cadastru și îți complică o vânzare viitoare.</p>
+          </li>
+          <li class="risk" data-reveal>
+            <span class="risk__num">03</span>
+            <h3>Defecte ascunse de mobilă</h3>
+            <p>Umezeala din spatele dulapului, coloanele vechi sau tabloul electric prea mic se văd abia după mutare, când reparația e a ta.</p>
+          </li>
+          <li class="risk" data-reveal>
+            <span class="risk__num">04</span>
+            <h3>Un antecontract scris pentru vânzător</h3>
+            <p>Clauzele despre avans, termene și penalități pot fi dezechilibrate. Dacă tranzacția cade, banii se recuperează greu.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- 03 · Soluția: ce verificăm -->
+    <section class="inspect" id="ce-verificam" aria-labelledby="verificam-titlu">
+      <div class="wrap">
+        <header class="section-head">
+          <p class="eyebrow"><span class="eyebrow__num">02</span> Ce verificăm</p>
+          <h2 id="verificam-titlu">Un dosar complet despre apartament, înainte să semnezi ceva.</h2>
+          <p class="section-head__lead">
+            Arcada lucrează doar pentru cumpărător. La fiecare apartament trecem prin aceleași cinci puncte.
+            Alege unul de pe plan ca să vezi ce facem acolo.
+          </p>
+        </header>
+
+        <div class="plan" data-plan>
+          <div class="plan__drawing" data-reveal>
+            <svg class="plan__svg" viewBox="0 0 700 460" aria-hidden="true" focusable="false">
+              <defs>
+                <marker id="arr" viewBox="0 0 10 10" refX="5" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M0 0 10 5 0 10z" fill="currentColor"/>
+                </marker>
+                <pattern id="hatch" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+                  <line x1="0" y1="0" x2="0" y2="8" stroke="currentColor" stroke-width="1" opacity=".35"/>
+                </pattern>
+              </defs>
+              <!-- cote -->
+              <g class="plan__dims">
+                <line x1="40" y1="22" x2="600" y2="22" marker-start="url(#arr)" marker-end="url(#arr)"/>
+                <line x1="40" y1="14" x2="40" y2="34"/><line x1="600" y1="14" x2="600" y2="34"/>
+                <text x="320" y="16" text-anchor="middle">11,20 m</text>
+                <line x1="22" y1="40" x2="22" y2="400" marker-start="url(#arr)" marker-end="url(#arr)"/>
+                <text x="14" y="220" text-anchor="middle" transform="rotate(-90 14 220)">7,20 m</text>
+              </g>
+              <!-- balcon închis: hașurat -->
+              <rect class="plan__balcony" x="600" y="48" width="74" height="176" fill="url(#hatch)"/>
+              <path class="plan__wall plan__wall--thin" d="M600 48H674V224H600" fill="none" stroke-dasharray="6 5"/>
+              <!-- pereți exteriori, cu goluri pentru ferestre -->
+              <path class="plan__wall" d="M40 40H120M200 40H260M330 40H420M520 40H600V100M600 170V400H40V40" fill="none"/>
+              <!-- ferestre -->
+              <g class="plan__win">
+                <path d="M120 36H200M120 44H200M260 36H330M260 44H330M420 36H520M420 44H520M596 100V170M604 100V170"/>
+              </g>
+              <!-- pereți interiori -->
+              <path class="plan__wall plan__wall--in" d="M360 40V160M360 210V260M40 260H150M190 260H250M290 260H360V400M220 260V400M360 230H440M480 230H600" fill="none"/>
+              <!-- uși (arce) -->
+              <g class="plan__doors">
+                <path d="M360 160A50 50 0 0 1 410 210" /><line x1="360" y1="160" x2="360" y2="210"/>
+                <path d="M150 260A40 40 0 0 0 190 300"/>
+                <path d="M250 260A40 40 0 0 1 290 300"/>
+                <path d="M440 230A40 40 0 0 0 480 270"/>
+                <path d="M520 400A44 44 0 0 1 564 356"/>
+              </g>
+              <!-- etichete de încăperi -->
+              <g class="plan__labels">
+                <text x="200" y="120">LIVING</text><text x="200" y="138" class="sub">24,6 mp</text>
+                <text x="480" y="120">DORMITOR</text><text x="480" y="138" class="sub">14,2 mp</text>
+                <text x="130" y="350">BUCĂTĂRIE</text><text x="130" y="368" class="sub">8,1 mp</text>
+                <text x="290" y="350">BAIE</text><text x="290" y="368" class="sub">4,3 mp</text>
+                <text x="480" y="300">HOL</text><text x="480" y="318" class="sub">7,9 mp</text>
+                <text x="637" y="246" class="sub">balcon închis?</text>
+              </g>
+            </svg>
+
+            <!-- punctele de pe plan sunt butoane reale, poziționate peste desen -->
+            <button class="pin" type="button" style="--x:62.5;--y:76" data-pin="0" aria-controls="punct-0" aria-label="Punctul 1: Cartea funciară și cadastrul">1</button>
+            <button class="pin" type="button" style="--x:41;--y:68" data-pin="1" aria-controls="punct-1" aria-label="Punctul 2: Umezeală și scurgeri">2</button>
+            <button class="pin" type="button" style="--x:13;--y:68" data-pin="2" aria-controls="punct-2" aria-label="Punctul 3: Gaz și instalația electrică">3</button>
+            <button class="pin" type="button" style="--x:91.5;--y:24" data-pin="3" aria-controls="punct-3" aria-label="Punctul 4: Modificări neautorizate">4</button>
+            <button class="pin" type="button" style="--x:22;--y:38" data-pin="4" aria-controls="punct-4" aria-label="Punctul 5: Prețul">5</button>
+          </div>
+
+          <ol class="plan__list">
+            <li id="punct-0" class="plan__item" data-item="0">
+              <button type="button" class="plan__item-btn" data-item-btn="0" aria-expanded="true">
+                <span class="plan__item-num">1</span>
+                <span class="plan__item-title">Cartea funciară și cadastrul</span>
+                <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-file-lines"></use></svg>
+              </button>
+              <p>Cerem extrasul de carte funciară și verificăm cine sunt proprietarii, ce sarcini există și dacă suprafața din acte corespunde cu cea măsurată la fața locului.</p>
+            </li>
+            <li id="punct-1" class="plan__item" data-item="1">
+              <button type="button" class="plan__item-btn" data-item-btn="1" aria-expanded="false">
+                <span class="plan__item-num">2</span>
+                <span class="plan__item-title">Umezeală și scurgeri</span>
+                <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-droplet"></use></svg>
+              </button>
+              <p>Măsurăm umiditatea pereților cu higrometrul, mai ales în baie și pe pereții exteriori, și verificăm ventilația și scurgerile.</p>
+            </li>
+            <li id="punct-2" class="plan__item" data-item="2">
+              <button type="button" class="plan__item-btn" data-item-btn="2" aria-expanded="false">
+                <span class="plan__item-num">3</span>
+                <span class="plan__item-title">Gaz și instalația electrică</span>
+                <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-triangle-exclamation"></use></svg>
+              </button>
+              <p>Ne uităm la vechimea instalațiilor, la tabloul electric și la documentele reviziei de gaz. Îți spunem ce trebuie schimbat și în ce ordine.</p>
+            </li>
+            <li id="punct-3" class="plan__item" data-item="3">
+              <button type="button" class="plan__item-btn" data-item-btn="3" aria-expanded="false">
+                <span class="plan__item-num">4</span>
+                <span class="plan__item-title">Modificări neautorizate</span>
+                <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-ruler-combined"></use></svg>
+              </button>
+              <p>Comparăm planul din cadastru cu ce vedem: balcoane închise, pereți mutați, mansarde amenajate. Fiecare diferență are un cost, la preț sau la acte.</p>
+            </li>
+            <li id="punct-4" class="plan__item" data-item="4">
+              <button type="button" class="plan__item-btn" data-item-btn="4" aria-expanded="false">
+                <span class="plan__item-num">5</span>
+                <span class="plan__item-title">Prețul</span>
+                <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-scale-balanced"></use></svg>
+              </button>
+              <p>Comparăm prețul cerut cu apartamente asemănătoare din aceeași zonă și îți spunem ce argumente ai la negociere, pe baza a ce am găsit.</p>
+            </li>
+          </ol>
+        </div>
+
+        <!-- Beneficii, ca o fișă tehnică: ce facem → ce înseamnă → ce câștigi -->
+        <div class="spec" aria-labelledby="spec-titlu">
+          <h3 class="spec__title" id="spec-titlu">Ce primești de la noi</h3>
+          <div class="spec__head" aria-hidden="true">
+            <span>Ce facem</span><span>Ce înseamnă</span><span>Ce câștigi</span>
+          </div>
+          <ul class="spec__rows">
+            <li class="spec__row" data-reveal>
+              <p class="spec__f"><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-file-lines"></use></svg><span><strong>Raport scris după fiecare vizionare</strong>, cu fotografii și măsurători.</span></p>
+              <p class="spec__a"><span class="spec__label">Ce înseamnă</span>Compari apartamentele pe aceleași criterii, nu după impresia de la vizionare.</p>
+              <p class="spec__b"><span class="spec__label">Ce câștigi</span>Alegi cu argumente și știi dinainte ce reparații urmează.</p>
+            </li>
+            <li class="spec__row" data-reveal>
+              <p class="spec__f"><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-handshake"></use></svg><span><strong>Negociem noi</strong>, în numele tău.</span></p>
+              <p class="spec__a"><span class="spec__label">Ce înseamnă</span>Discuția despre preț se sprijină pe defectele găsite și pe prețurile din zonă, nu pe tocmeală.</p>
+              <p class="spec__b"><span class="spec__label">Ce câștigi</span>Poți plăti mai puțin sau poți cere ca vânzătorul să repare înainte de semnare.</p>
+            </li>
+            <li class="spec__row" data-reveal>
+              <p class="spec__f"><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-magnifying-glass"></use></svg><span><strong>Citim antecontractul</strong> înainte să-l semnezi.</span></p>
+              <p class="spec__a"><span class="spec__label">Ce înseamnă</span>Clauzele despre avans, termene și penalități sunt echilibrate pentru ambele părți.</p>
+              <p class="spec__b"><span class="spec__label">Ce câștigi</span>Avansul tău e protejat dacă tranzacția nu se mai face din vina vânzătorului.</p>
+            </li>
+            <li class="spec__row" data-reveal>
+              <p class="spec__f"><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-key"></use></svg><span><strong>Tarif fix, plătit de tine</strong>, nu procent din preț.</span></p>
+              <p class="spec__a"><span class="spec__label">Ce înseamnă</span>Nu câștigăm mai mult dacă plătești mai mult pe apartament.</p>
+              <p class="spec__b"><span class="spec__label">Ce câștigi</span>Ai alături pe cineva care chiar vrea ca prețul să fie mai mic.</p>
+            </li>
+          </ul>
+          <div class="cta-row">
+            <a class="btn btn--tape" href="#contact">Programează o consultație</a>
+            <p>Ne spui ce apartament ai în vedere, iar noi îți spunem ce am verifica la el.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 · Imagini: același oraș, alte verificări -->
+    <section class="city" aria-labelledby="oras-titlu">
+      <div class="wrap">
+        <header class="section-head section-head--row">
+          <p class="eyebrow"><span class="eyebrow__num">03</span> Cluj, clădire cu clădire</p>
+          <h2 id="oras-titlu">Fiecare tip de clădire are riscurile lui.</h2>
+        </header>
+        <ul class="city__strip">
+          <li class="city__card city__card--tall" data-reveal>
+            <picture>
+              <source type="image/webp" srcset="/img/cluj-vila-veche-800.webp 800w, /img/cluj-vila-veche-1600.webp 1600w" sizes="(min-width: 960px) 30vw, 80vw">
+              <img src="/img/cluj-vila-veche-800.webp" width="800" height="1200" loading="lazy" decoding="async"
+                   alt="Clădire istorică din Cluj-Napoca, cu turn și acoperiș de țiglă, pe colțul unei străzi.">
+            </picture>
+            <div class="city__text">
+              <span class="mono">Clădiri vechi</span>
+              <p>Mulți proprietari de-a lungul anilor, moșteniri, uneori acte incomplete. Aici verificarea cărții funciare durează cel mai mult.</p>
+            </div>
+          </li>
+          <li class="city__card" data-reveal>
+            <picture>
+              <source type="image/webp" srcset="/img/bloc-nou-800.webp 800w, /img/bloc-nou-1600.webp 1600w" sizes="(min-width: 960px) 36vw, 80vw">
+              <img src="/img/bloc-nou-800.webp" width="800" height="533" loading="lazy" decoding="async"
+                   alt="Bloc de locuințe nou, alb, cu balcoane drepte și o parcare în față.">
+            </picture>
+            <div class="city__text">
+              <span class="mono">Blocuri noi</span>
+              <p>Autorizația de construire, procesul-verbal de recepție și diferența dintre planul de la vânzare și ce s-a construit.</p>
+            </div>
+          </li>
+          <li class="city__card" data-reveal>
+            <picture>
+              <source type="image/webp" srcset="/img/camera-goala-800.webp 800w, /img/camera-goala-1600.webp 1600w" sizes="(min-width: 960px) 36vw, 80vw">
+              <img src="/img/camera-goala-800.webp" width="800" height="533" loading="lazy" decoding="async"
+                   alt="Cameră goală, luminoasă, cu parchet de lemn și ferestre mari spre oraș.">
+            </picture>
+            <div class="city__text">
+              <span class="mono">Apartamente goale</span>
+              <p>Cel mai bun moment să vezi pereții, pardoseala și instalațiile. Fără mobilă, nu se mai ascunde nimic.</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- 05 · Cum funcționează -->
+    <section class="steps" id="cum-lucram" aria-labelledby="pasi-titlu">
+      <div class="wrap steps__grid">
+        <header class="section-head">
+          <p class="eyebrow"><span class="eyebrow__num">04</span> Cum lucrăm</p>
+          <h2 id="pasi-titlu">Patru pași, de la prima discuție la chei.</h2>
+          <p class="section-head__lead">Poți începe cu orice pas. Dacă ai găsit deja apartamentul, sărim direct la verificare.</p>
+          <figure class="steps__photo" data-reveal>
+            <picture>
+              <source type="image/webp" srcset="/img/verificare-acte-800.webp 800w, /img/verificare-acte-1600.webp 1600w" sizes="(min-width: 960px) 30vw, 92vw">
+              <img src="/img/verificare-acte-800.webp" width="800" height="1200" loading="lazy" decoding="async"
+                   alt="Două persoane citesc împreună un document tipărit, la o masă.">
+            </picture>
+          </figure>
+        </header>
+
+        <ol class="timeline">
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__num">01</span>
+            <div>
+              <h3>Discuția inițială</h3>
+              <p>30 de minute, online sau la apartament. Ne spui bugetul, zona și ce ai găsit până acum. E gratuită și nu te obligă la nimic.</p>
+            </div>
+          </li>
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__num">02</span>
+            <div>
+              <h3>Oferta scrisă</h3>
+              <p>Îți trimitem pe e-mail ce verificăm și tariful fix. Începem doar dacă ești de acord cu ea.</p>
+            </div>
+          </li>
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__num">03</span>
+            <div>
+              <h3>Verificare și vizionare</h3>
+              <p>Cerem actele, venim cu tine la vizionare și îți dăm raportul scris. Dacă găsim o problemă gravă, ți-o spunem înainte de orice avans.</p>
+            </div>
+          </li>
+          <li class="timeline__step" data-reveal>
+            <span class="timeline__num">04</span>
+            <div>
+              <h3>Negociere și notar</h3>
+              <p>Negociem prețul, citim antecontractul și contractul și venim cu tine la semnare. Pleci de acolo cu cheile.</p>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div class="wrap rules">
+        <p class="rules__title mono">Trei reguli pe care le respectăm la fiecare client</p>
+        <ul class="rules__list">
+          <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Nu primim comision de la vânzător.</li>
+          <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Nu te grăbim să alegi un apartament ca să terminăm mai repede.</li>
+          <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Poți renunța după raport, fără să plătești restul serviciilor.</li>
+        </ul>
+        <a class="btn btn--ink" href="#contact">Programează o consultație</a>
+      </div>
+    </section>
+
+    <!-- 06 · Întrebări frecvente -->
+    <section class="faq" id="intrebari" aria-labelledby="faq-titlu">
+      <div class="wrap faq__grid">
+        <header class="section-head">
+          <p class="eyebrow"><span class="eyebrow__num">05</span> Întrebări</p>
+          <h2 id="faq-titlu">Ce ne întreabă oamenii înainte să înceapă.</h2>
+          <p class="section-head__lead">Nu ai găsit răspunsul? Scrie-ne pe WhatsApp sau în formular.</p>
+        </header>
+        <div class="faq__list">
+          <details class="qa" name="faq" open>
+            <summary><span>Cât costă?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
+            <div class="qa__body"><p>Tariful e fix pe apartament și depinde de ce verificări alegi. Îl primești în scris după prima discuție, înainte să începem. Prima discuție e gratuită.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary><span>De ce n-aș lucra direct cu agentul din anunț?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
+            <div class="qa__body"><p>Poți, și mulți agenți sunt corecți. Dar agentul din anunț e plătit de vânzător, de obicei ca procent din preț, așa că interesul lui e ca tranzacția să se facă la un preț cât mai mare. Noi suntem plătiți de tine, cu un tarif fix.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary><span>Am găsit deja apartamentul. Mă ajutați doar cu verificarea?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
+            <div class="qa__body"><p>Da. Poți alege doar verificarea actelor și vizionarea, fără negociere și fără însoțire la notar. Ideal e să ne scrii înainte să plătești avansul.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary><span>Înlocuiți notarul sau avocatul?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
+            <div class="qa__body"><p>Nu. Notarul autentifică actul, iar noi nu dăm consultanță juridică. Verificăm documentele publice, cum ar fi extrasul de carte funciară și planul cadastral, și îți spunem ce întrebări să pui. Pentru situații complicate îți recomandăm să lucrezi și cu un avocat.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary><span>Cumpăr cu credit ipotecar. Se schimbă ceva?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
+            <div class="qa__body"><p>Pașii sunt aceiași. În plus, ținem cont de termenele băncii în antecontract și ne asigurăm că actele apartamentului sunt complete pentru evaluarea cerută de bancă.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary><span>Ce se întâmplă dacă găsiți o problemă gravă?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
+            <div class="qa__body"><p>Ți-o spunem în scris, cu ce înseamnă pentru tine și ce opțiuni ai. Tu decizi dacă negociezi, dacă ceri remedierea sau dacă renunți. Poți opri colaborarea după raport.</p></div>
+          </details>
+          <details class="qa" name="faq">
+            <summary><span>În ce zone lucrați?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
+            <div class="qa__body"><p>În Cluj-Napoca și în localitățile din jur: Florești, Baciu, Apahida și Feleacu. Pentru alte zone, întreabă-ne.</p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 · Formular -->
+    <section class="contact" id="contact" aria-labelledby="contact-titlu">
+      <div class="wrap contact__grid">
+        <div class="contact__intro">
+          <p class="eyebrow"><span class="eyebrow__num">06</span> Contact</p>
+          <h2 id="contact-titlu">Programează o consultație</h2>
+          <p class="section-head__lead">Scrie-ne ce apartament ai în vedere sau ce cauți. Te sunăm ca să stabilim prima discuție.</p>
+
+          <div class="after">
+            <p class="after__title mono">Ce se întâmplă după ce trimiți</p>
+            <ol class="after__list">
+              <li><span>01</span> Primești pe e-mail o confirmare că am primit solicitarea.</li>
+              <li><span>02</span> Un consultant citește ce ne-ai scris și te sună la numărul lăsat.</li>
+              <li><span>03</span> Stabilim împreună prima discuție, online sau la apartament.</li>
+            </ol>
+          </div>
+
+          <figure class="contact__photo">
+            <picture>
+              <source type="image/webp" srcset="/img/cheia-800.webp 800w, /img/cheia-1600.webp 1600w" sizes="(min-width: 960px) 28vw, 60vw">
+              <img src="/img/cheia-800.webp" width="800" height="1420" loading="lazy" decoding="async"
+                   alt="O mână ține cheia unui apartament, cu plante verzi în fundal.">
+            </picture>
+          </figure>
+        </div>
+
+        <div class="form-card">
+          <form class="form" id="formular" novalidate data-form>
+            <p class="form__legend"><span aria-hidden="true">*</span> Toate câmpurile sunt obligatorii.</p>
+
+            <div class="field" data-field="name">
+              <label for="f-name">Nume și prenume <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-name" name="name" type="text" autocomplete="name" required maxlength="80"
+                     aria-describedby="f-name-err">
+              <p class="field__msg" id="f-name-err" aria-live="polite"></p>
+            </div>
+
+            <div class="field" data-field="email">
+              <label for="f-email">Adresă de e-mail <span class="req" aria-hidden="true">*</span></label>
+              <input id="f-email" name="email" type="email" inputmode="email" autocomplete="email" required maxlength="254"
+                     aria-describedby="f-email-hint f-email-err" spellcheck="false" autocapitalize="off">
+              <p class="field__hint" id="f-email-hint">Aici primești confirmarea solicitării.</p>
+              <p class="field__msg" id="f-email-err" aria-live="polite"></p>
+            </div>
+
+            <div class="field field--phone" data-field="phone">
+              <label for="f-phone" id="f-phone-label">Număr de telefon <span class="req" aria-hidden="true">*</span></label>
+              <div class="phone">
+                <div class="country" data-country>
+                  <button class="country__btn" type="button" aria-haspopup="listbox" aria-expanded="false"
+                          aria-controls="tari" aria-labelledby="country-sr country-current" data-country-btn>
+                    <span class="sr-only" id="country-sr">Țara pentru numărul de telefon:</span>
+                    <span id="country-current" class="country__current">
+                      <img class="country__flag" src="/flags/ro.svg" alt="" width="20" height="15" data-country-flag>
+                      <span class="country__code" data-country-code>+40</span>
+                      <span class="sr-only" data-country-name>România</span>
+                    </span>
+                    <svg class="ico country__chev" aria-hidden="true"><use href="/icons.svg#i-chevron-down"></use></svg>
+                  </button>
+                  <div class="country__pop" hidden data-country-pop>
+                    <label class="sr-only" for="country-search">Caută țara</label>
+                    <input class="country__search" id="country-search" type="text" role="combobox" autocomplete="off"
+                           aria-autocomplete="list" aria-expanded="true" aria-controls="tari"
+                           placeholder="Caută țara sau prefixul" data-country-search>
+                    <ul class="country__list" id="tari" role="listbox" aria-label="Țări" data-country-list></ul>
+                  </div>
+                </div>
+                <input id="f-phone" name="phone" type="tel" inputmode="tel" autocomplete="tel" required maxlength="24"
+                       aria-describedby="f-phone-hint f-phone-err">
+              </div>
+              <input type="hidden" name="country" value="RO" data-country-value>
+              <p class="field__hint" id="f-phone-hint" data-phone-hint aria-live="polite">Poți scrie și cu prefix, de exemplu +39 pentru Italia. Țara se schimbă singură.</p>
+              <p class="field__msg" id="f-phone-err" aria-live="polite"></p>
+            </div>
+
+            <div class="field" data-field="message">
+              <label for="f-message">Ce apartament ai în vedere? <span class="req" aria-hidden="true">*</span></label>
+              <textarea id="f-message" name="message" rows="5" required maxlength="2000"
+                        aria-describedby="f-message-hint f-message-err"></textarea>
+              <p class="field__hint" id="f-message-hint">Zona, bugetul aproximativ, un link spre anunț sau ce te îngrijorează.</p>
+              <p class="field__msg" id="f-message-err" aria-live="polite"></p>
+            </div>
+
+            <!-- capcană pentru roboți: ascunsă pentru oameni și cititoare de ecran -->
+            <div class="hp" aria-hidden="true">
+              <label for="f-company">Companie</label>
+              <input id="f-company" name="company" type="text" tabindex="-1" autocomplete="off">
+            </div>
+
+            <p class="form__privacy">
+              Folosim numele, e-mailul și telefonul doar ca să-ți răspundem la această solicitare.
+              Nu le folosim pentru reclame și nu le dăm altcuiva.
+            </p>
+
+            <div class="form__alert" role="alert" hidden data-form-alert>
+              <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-triangle-exclamation"></use></svg>
+              <div>
+                <p data-form-alert-text></p>
+                <button class="btn btn--ink btn--sm" type="submit" data-retry>
+                  <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-rotate-right"></use></svg> Încearcă din nou
+                </button>
+              </div>
+            </div>
+
+            <button class="btn btn--tape btn--lg btn--block form__submit" type="submit" data-submit>
+              <span class="spinner" aria-hidden="true"></span>
+              <span data-submit-label>Trimite solicitarea</span>
+            </button>
+          </form>
+
+          <div class="success" hidden tabindex="-1" data-success>
+            <svg class="ico success__ico" aria-hidden="true"><use href="/icons.svg#i-circle-check"></use></svg>
+            <h3>Am primit solicitarea.</h3>
+            <p>Ți-am trimis un e-mail de confirmare la <strong data-success-email></strong>. Dacă nu-l vezi în câteva minute, uită-te și în dosarul Spam sau Promoții.</p>
+            <p>Un consultant te va suna la numărul lăsat ca să stabiliți prima discuție.</p>
+            <button class="link-arrow" type="button" data-new-request>Trimite altă solicitare</button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <figure class="footer__band" aria-hidden="true">
+      <picture>
+        <source type="image/webp" srcset="/img/cluj-acoperisuri-800.webp 800w, /img/cluj-acoperisuri-1600.webp 1600w" sizes="100vw">
+        <img src="/img/cluj-acoperisuri-800.webp" width="800" height="1278" loading="lazy" decoding="async" alt="">
+      </picture>
+    </figure>
+    <div class="wrap footer__grid">
+      <div class="footer__brand">
+        <a class="brand brand--light" href="#inceput" aria-label="Arcada, înapoi la început">
+          <svg class="brand__mark" viewBox="0 0 40 40" aria-hidden="true">
+            <path d="M4 36V18a16 16 0 0 1 32 0v18" fill="none" stroke="currentColor" stroke-width="3.2"/>
+            <path d="M12 36V19a8 8 0 0 1 16 0v17" fill="none" stroke="currentColor" stroke-width="3.2"/>
+            <rect x="17" y="3" width="6" height="6" fill="var(--tape)" stroke="currentColor" stroke-width="1.6"/>
+          </svg>
+          <span class="brand__word">Arcada</span>
+        </a>
+        <p>Consultanță imobiliară pentru cumpărători. Lucrăm doar de partea ta.</p>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__label mono">Contact</p>
+        <ul>
+          <li><a href="tel:__PHONE_E164__"><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-phone"></use></svg> __PHONE_DISPLAY__</a></li>
+          <li><a href="mailto:__CONTACT_EMAIL__"><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-envelope"></use></svg> __CONTACT_EMAIL__</a></li>
+          <li><a href="__WHATSAPP_URL__" target="_blank" rel="noopener"><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-whatsapp"></use></svg> WhatsApp<span class="sr-only"> (se deschide într-o filă nouă)</span></a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__label mono">Unde și când</p>
+        <ul>
+          <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-location-dot"></use></svg> Cluj-Napoca și împrejurimi. Ne întâlnim la apartament sau online.</li>
+          <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-clock"></use></svg> Luni–vineri, 9:00–18:00</li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <p class="footer__label mono">Pe pagină</p>
+        <ul>
+          <li><a href="#problema">Ce nu scrie în anunț</a></li>
+          <li><a href="#ce-verificam">Ce verificăm</a></li>
+          <li><a href="#cum-lucram">Cum lucrăm</a></li>
+          <li><a href="#intrebari">Întrebări</a></li>
+          <li><a href="#contact">Programează o consultație</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="wrap footer__legal">
+      <p><strong>Proiect demonstrativ, realizat în scop educațional.</strong> Arcada este un brand inventat; nu există o firmă reală cu acest nume în spatele paginii.</p>
+      <p>Fotografii și clip: <a href="https://www.pexels.com/license/" target="_blank" rel="noopener">Pexels<span class="sr-only"> (se deschide într-o filă nouă)</span></a>. Iconuri: Font Awesome Free (CC BY 4.0). Fonturi: Bricolage Grotesque, IBM Plex Mono (SIL OFL). <span data-year>2026</span></p>
+    </div>
+  </footer>
+
+  <a class="wa" href="__WHATSAPP_URL__" target="_blank" rel="noopener" data-wa>
+    <span class="wa__pulse" aria-hidden="true" data-wa-pulse></span>
+    <svg class="ico wa__ico" aria-hidden="true"><use href="/icons.svg#i-whatsapp"></use></svg>
+    <span class="wa__label">Scrie-ne pe WhatsApp<span class="sr-only"> (se deschide într-o filă nouă)</span></span>
+  </a>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
+</html>
