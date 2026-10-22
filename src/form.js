@@ -303,7 +303,7 @@ export function initForm(form) {
           country: picker.get(),
           message: form.elements.message.value,
           company: form.elements.company.value,
-          startedAt,
+          fillMs: Date.now() - startedAt,
         }),
         signal: ctrl.signal,
       });

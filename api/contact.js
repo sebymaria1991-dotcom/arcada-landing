@@ -72,8 +72,9 @@ export default async function handler(req, res) {
   // Răspundem „ok” ca robotul să nu afle că a fost oprit, dar nu trimitem nimic.
   if (body.company) return send(res, 200, { ok: true });
 
-  const started = Number(body.startedAt);
-  if (!Number.isFinite(started) || Date.now() - started < MIN_FILL_MS) {
+  // Durata completării e măsurată în browser cu același ceas, deci nu depinde de ora calculatorului.
+  const fillMs = Number(body.fillMs);
+  if (!Number.isFinite(fillMs) || fillMs < MIN_FILL_MS) {
     return send(res, 400, {
       ok: false,
       message: 'Formularul a fost trimis prea repede. Așteaptă câteva secunde și încearcă din nou.',
@@ -104,7 +105,8 @@ export default async function handler(req, res) {
 
   const from = process.env.MAIL_FROM || `Arcada <${process.env.SMTP_USER}>`;
   const inbox = process.env.LEAD_INBOX || process.env.SMTP_USER;
-  const siteUrl = process.env.SITE_URL || '';
+  const host = String(req.headers['x-forwarded-host'] || req.headers.host || '');
+  const siteUrl = process.env.SITE_URL || (/^[a-z0-9.-]+.[a-z]{2,}$/i.test(host) ? `https://${host}` : '');
   const meta = { at: new Date().toLocaleString('ro-RO', { timeZone: 'Europe/Bucharest' }) };
 
   try {

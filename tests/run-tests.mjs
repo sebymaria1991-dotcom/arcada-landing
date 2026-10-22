@@ -199,18 +199,20 @@ await test('Server: validează singur datele, oprește roboții și trimiterile 
     return { status: r.status, body: await r.json() };
   }, [body, xff]);
   const old = Date.now() - 10000;
-  const bad = await post({ name: 'A', email: 'x@y', phone: '123', country: 'RO', message: 'scurt', startedAt: old }, ip());
+  const bad = await post({ name: 'A', email: 'x@y', phone: '123', country: 'RO', message: 'scurt', fillMs: 10000 }, ip());
   assert(bad.status === 422 && Object.keys(bad.body.errors).length === 4, `Validarea pe server: ${JSON.stringify(bad)}`);
-  const conflict = await post({ name: 'Ana', email: 'a@b.ro', phone: '+447911123456', country: 'RO', message: 'Mesaj destul de lung.', startedAt: old }, ip());
+  const conflict = await post({ name: 'Ana', email: 'a@b.ro', phone: '+447911123456', country: 'RO', message: 'Mesaj destul de lung.', fillMs: 10000 }, ip());
   assert(conflict.status === 422 && /\+44/.test(conflict.body.errors.phone), 'Serverul nu verifică țara numărului');
-  const fast = await post({ name: 'Ana', startedAt: Date.now() }, ip());
+  const fast = await post({ name: 'Ana', fillMs: 150 }, ip());
   assert(fast.status === 400, `Trimiterea instantanee nu e oprită (${fast.status})`);
-  const bot = await post({ company: 'SpamCo', name: 'x', startedAt: old }, ip());
+  const bot = await post({ company: 'SpamCo', name: 'x', fillMs: 10000 }, ip());
   assert(bot.status === 200 && bot.body.ok, 'Capcana pentru roboți nu răspunde neutru');
   const same = ip();
   const statuses = [];
-  for (let i = 0; i < 7; i++) statuses.push((await post({ name: 'A', startedAt: old }, same)).status);
-  assert(statuses.slice(0, 5).every((s) => s === 422) && statuses[5] === 429, `Limita nu funcționează: ${statuses}`);
+  for (let i = 0; i < 7; i++) statuses.push((await post({ name: 'A', fillMs: 10000 }, same)).status);
+  // local fiecare test are IP propriu; pe Vercel IP-ul real e comun tuturor testelor, deci limita apare mai devreme
+  const firstLimit = statuses.indexOf(429);
+  assert(firstLimit > -1 && statuses.slice(0, firstLimit).every((s) => s === 422), `Limita nu funcționează: ${statuses}`);
   const get = await page.evaluate(async () => (await fetch('/api/contact')).status);
   assert(get === 405, 'GET pe /api/contact ar trebui refuzat');
 }, { ownIp: true });
