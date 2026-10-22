@@ -2,8 +2,8 @@
 
 Proiect demonstrativ, educațional. **Arcada este un brand inventat.** Pagina nu reprezintă o firmă reală.
 
-- Link public: _se completează după publicare_
-- Cod sursă: _se completează după publicare_
+- Link public: **https://arcada-landing.vercel.app**
+- Cod sursă: **https://github.com/sebymaria1991-dotcom/arcada-landing**
 
 ## Conceptul
 
@@ -148,7 +148,7 @@ BASE_URL=https://site-ul-public npm test  # rulează testele pe site-ul publicat
 | Video, WhatsApp, linkuri | copertă, controale, fără pornire automată, fără sonor, rulează; `wa.me` cu numărul; toate ancorele și fișierele există; nicio imagine fără `alt`; niciun text provizoriu |
 | Mișcare | banda se oprește și pornește din buton; la mișcare redusă stă pe loc, se poate derula și nu mai există animații de apariție |
 
-Rezultatul ultimei rulări: _se completează după publicare_
+Ultima rulare, pe site-ul publicat (22.10.2026), cu e-mail real trimis prin Gmail: **19/19 teste trecute**. Local (Vite + SMTP de test Ethereal): tot 19/19.
 
 ## Limitări cunoscute
 
