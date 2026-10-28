@@ -54,7 +54,7 @@
           <li><a href="#intrebari">Întrebări</a></li>
           <li class="menu__bubble" aria-hidden="true"></li>
         </ul>
-        <a class="btn btn--tape menu__cta" href="#contact">Programează o consultație</a>
+        <a class="btn btn--tape menu__cta" href="#contact">Programează discuția gratuită</a>
       </nav>
 
       <button class="nav__burger" type="button" aria-expanded="false" aria-controls="meniu" data-burger>
@@ -77,12 +77,12 @@
             <span class="line hero__title-us"><mark>Noi lucrăm pentru tine.</mark></span>
           </h1>
           <p class="hero__lead">
-            Arcada îți verifică actele, starea reală și prețul apartamentului pe care vrei să-l cumperi,
-            apoi negociază în numele tău. Ajungi la notar știind exact ce semnezi.
+            Înainte să dai avansul, Arcada îți verifică actele, starea reală și prețul apartamentului
+            pe care vrei să-l cumperi, apoi negociază în numele tău. Ajungi la notar știind exact ce semnezi.
           </p>
           <div class="hero__actions">
             <a class="btn btn--tape btn--lg" href="#contact">
-              Programează o consultație
+              Programează discuția gratuită
               <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-arrow-right"></use></svg>
             </a>
             <a class="link-arrow" href="#ce-verificam">Vezi ce verificăm</a>
@@ -163,6 +163,30 @@
             <p>Clauzele despre avans, termene și penalități pot fi dezechilibrate. Dacă tranzacția cade, banii se recuperează greu.</p>
           </li>
         </ol>
+
+      </div>
+
+      <div class="wrap">
+        <!-- Scenariu ilustrativ: cum arată riscurile pe un caz concret -->
+        <article class="case" aria-labelledby="caz-titlu" data-reveal>
+          <p class="case__tag mono">Scenariu tipic · exemplu inventat</p>
+          <h3 class="case__title" id="caz-titlu">Un 2 camere în Mărăști, la un preț bun. Agentul vrea avansul până vineri.</h3>
+          <ol class="case__steps">
+            <li>
+              <span class="case__step mono">Înainte</span>
+              <p>Andrei găsește apartamentul: luminos, renovat, aproape de serviciu. I se spune că mai sunt doi interesați. E gata să dea avansul în aceeași săptămână.</p>
+            </li>
+            <li>
+              <span class="case__step mono">Ce am găsit</span>
+              <p>În extrasul de carte funciară, o ipotecă a vânzătorului despre care anunțul nu spunea nimic. Balconul închis, inclus în preț ca suprafață, nu apare în cadastru. Pe peretele exterior din dormitor, în spatele dulapului, umezeală.</p>
+            </li>
+            <li>
+              <span class="case__step mono">După</span>
+              <p>Andrei cere ca în antecontract să scrie cum se stinge ipoteca la semnare și negociază prețul pentru balcon și pentru reparația peretelui. Dă avansul abia după aceea și ajunge la notar știind ce cumpără.</p>
+            </li>
+          </ol>
+          <p class="case__note">Andrei și apartamentul sunt inventați, ca să vezi cum arată o verificare. Situațiile sunt cele din lista de mai sus.</p>
+        </article>
       </div>
     </section>
 
@@ -279,6 +303,56 @@
           </ol>
         </div>
 
+        <!-- Dovadă: cum arată raportul pe care îl primești (exemplu cu date inventate) -->
+        <article class="report" aria-labelledby="raport-titlu" data-reveal>
+          <header class="report__head">
+            <p class="report__stamp mono">Exemplu · date inventate</p>
+            <h3 class="report__title" id="raport-titlu">Așa arată raportul pe care îl primești</h3>
+            <dl class="report__meta">
+              <div><dt>Apartament</dt><dd>2 camere, 59,1 mp în acte</dd></div>
+              <div><dt>Zona</dt><dd>Mărăști, Cluj-Napoca</dd></div>
+              <div><dt>Verificat</dt><dd>acte, vizionare, preț</dd></div>
+            </dl>
+          </header>
+          <ol class="report__rows">
+            <li class="report__row">
+              <span class="report__num">1</span>
+              <p class="report__what"><strong>Cartea funciară</strong>Proprietar unic. Ipotecă activă în favoarea unei bănci.</p>
+              <span class="status status--warn">De discutat</span>
+              <p class="report__todo">Cere ca antecontractul să spună cum se stinge ipoteca la semnare.</p>
+            </li>
+            <li class="report__row">
+              <span class="report__num">2</span>
+              <p class="report__what"><strong>Umezeală</strong>Valori ridicate pe peretele exterior din dormitor, în spatele dulapului.</p>
+              <span class="status status--bad">Problemă</span>
+              <p class="report__todo">Cere o ofertă de reparație și folosește-o la negociere.</p>
+            </li>
+            <li class="report__row">
+              <span class="report__num">3</span>
+              <p class="report__what"><strong>Gaz și electric</strong>Revizia de gaz e în termen. Tablou electric cu siguranțe automate.</p>
+              <span class="status status--ok">În regulă</span>
+              <p class="report__todo">Nimic de făcut acum.</p>
+            </li>
+            <li class="report__row">
+              <span class="report__num">4</span>
+              <p class="report__what"><strong>Modificări</strong>Balconul închis nu apare în cadastru. Celelalte încăperi corespund planului.</p>
+              <span class="status status--bad">Problemă</span>
+              <p class="report__todo">Nu plăti balconul ca suprafață utilă.</p>
+            </li>
+            <li class="report__row">
+              <span class="report__num">5</span>
+              <p class="report__what"><strong>Prețul</strong>Peste apartamentele asemănătoare din zonă, înainte să ții cont de reparații.</p>
+              <span class="status status--warn">De discutat</span>
+              <p class="report__todo">Argumente la negociere: punctele 2 și 4.</p>
+            </li>
+          </ol>
+          <p class="report__sources">
+            <strong>De unde luăm informațiile:</strong> extrasul de carte funciară pentru informare și planul cadastral, de la
+            <a href="https://www.ancpi.ro/" target="_blank" rel="noopener">ANCPI<span class="sr-only"> (se deschide într-o filă nouă)</span></a>,
+            măsurătorile de la vizionare și anunțurile pentru apartamente asemănătoare din aceeași zonă. Oricine poate cere un extras de carte funciară. Noi îți spunem ce înseamnă.
+          </p>
+        </article>
+
         <!-- Beneficii, ca o fișă tehnică: ce facem → ce înseamnă → ce câștigi -->
         <div class="spec" aria-labelledby="spec-titlu">
           <h3 class="spec__title" id="spec-titlu">Ce primești de la noi</h3>
@@ -307,9 +381,34 @@
               <p class="spec__b"><span class="spec__label">Ce câștigi</span>Ai alături pe cineva care chiar vrea ca prețul să fie mai mic.</p>
             </li>
           </ul>
-          <div class="cta-row">
-            <a class="btn btn--tape" href="#contact">Programează o consultație</a>
-            <p>Ne spui ce apartament ai în vedere, iar noi îți spunem ce am verifica la el.</p>
+        </div>
+
+        <!-- Oferta: tot ce primești, într-un singur loc -->
+        <div class="offer" aria-labelledby="oferta-titlu">
+          <div class="offer__head">
+            <p class="eyebrow">Oferta</p>
+            <h3 class="offer__title" id="oferta-titlu">Verificarea Arcada, înainte de avans</h3>
+            <p class="offer__lead">Tot ce facem pentru un apartament, de la prima discuție până la semnare.</p>
+          </div>
+          <ul class="offer__list">
+            <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Discuția inițială de 30 de minute, gratuită</li>
+            <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Extrasul de carte funciară citit: proprietari, sarcini, suprafață</li>
+            <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Vizionare cu higrometru, pe cele cinci puncte de pe plan</li>
+            <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Raport scris, cu fotografii și măsurători</li>
+            <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Negocierea prețului, pe baza a ce am găsit</li>
+            <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Antecontractul citit înainte să-l semnezi și însoțire la notar</li>
+          </ul>
+          <div class="offer__terms">
+            <p><strong>Tarif fix, primit în scris</strong> înainte să începem. Nu e procent din preț.</p>
+            <p><strong>Te poți opri după raport</strong> și nu plătești restul serviciilor.</p>
+            <a class="btn btn--tape btn--lg" href="#contact">
+              Programează discuția gratuită
+              <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-arrow-right"></use></svg>
+            </a>
+            <p class="offer__when">
+              <svg class="ico" aria-hidden="true"><use href="/icons.svg#i-clock"></use></svg>
+              Ideal e să ne scrii înainte să plătești avansul.
+            </p>
           </div>
         </div>
       </div>
@@ -415,7 +514,7 @@
           <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Nu te grăbim să alegi un apartament ca să terminăm mai repede.</li>
           <li><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-check"></use></svg> Poți renunța după raport, fără să plătești restul serviciilor.</li>
         </ul>
-        <a class="btn btn--ink" href="#contact">Programează o consultație</a>
+        <a class="btn btn--ink" href="#contact">Programează discuția gratuită</a>
       </div>
     </section>
 
@@ -434,7 +533,7 @@
           </details>
           <details class="qa" name="faq">
             <summary><span>De ce n-aș lucra direct cu agentul din anunț?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
-            <div class="qa__body"><p>Poți, și mulți agenți sunt corecți. Dar agentul din anunț e plătit de vânzător, de obicei ca procent din preț, așa că interesul lui e ca tranzacția să se facă la un preț cât mai mare. Noi suntem plătiți de tine, cu un tarif fix.</p></div>
+            <div class="qa__body"><p>Poți, și mulți agenți sunt corecți. Dar agentul din anunț e plătit de vânzător, de obicei ca procent din preț, așa că interesul lui e ca tranzacția să se facă la un preț cât mai mare.</p><p>În plus, în România multe agenții cer comision și cumpărătorului, frecvent 2–3% plus TVA. La un apartament de 200.000 €, 2% înseamnă 4.000 € plus TVA, plătiți cuiva care lucrează și pentru vânzător. Noi suntem plătiți doar de tine, cu un tarif fix.</p></div>
           </details>
           <details class="qa" name="faq">
             <summary><span>Am găsit deja apartamentul. Mă ajutați doar cu verificarea?</span><svg class="ico" aria-hidden="true"><use href="/icons.svg#i-plus"></use></svg></summary>
@@ -465,8 +564,8 @@
       <div class="wrap contact__grid">
         <div class="contact__intro">
           <p class="eyebrow"><span class="eyebrow__num">06</span> Contact</p>
-          <h2 id="contact-titlu">Programează o consultație</h2>
-          <p class="section-head__lead">Scrie-ne ce apartament ai în vedere sau ce cauți. Te sunăm ca să stabilim prima discuție.</p>
+          <h2 id="contact-titlu">Programează discuția gratuită</h2>
+          <p class="section-head__lead">Scrie-ne ce apartament ai în vedere sau ce cauți. Te sunăm ca să alegem împreună ziua și ora discuției gratuite de 30 de minute.</p>
 
           <div class="after">
             <p class="after__title mono">Ce se întâmplă după ce trimiți</p>
@@ -626,7 +725,7 @@
           <li><a href="#ce-verificam">Ce verificăm</a></li>
           <li><a href="#cum-lucram">Cum lucrăm</a></li>
           <li><a href="#intrebari">Întrebări</a></li>
-          <li><a href="#contact">Programează o consultație</a></li>
+          <li><a href="#contact">Programează discuția gratuită</a></li>
         </ul>
       </div>
     </div>

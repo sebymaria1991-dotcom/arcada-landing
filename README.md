@@ -11,7 +11,7 @@ Proiect demonstrativ, educațional. **Arcada este un brand inventat.** Pagina nu
 
 **Publicul:** oameni între 28 și 40 de ani care își cumpără primul apartament în Cluj, adesea cu credit ipotecar. Nu cunosc procedurile (carte funciară, cadastru, antecontract) și se tem să nu greșească la cea mai mare cheltuială din viața lor.
 
-**Acțiunea principală:** _Programează o consultație_. Prima discuție e gratuită și se cere prin formular sau pe WhatsApp. Același buton apare în meniu, în prima secțiune, după beneficii, după pași și în formular.
+**Acțiunea principală:** _Programează discuția gratuită_. Prima discuție (30 de minute) e gratuită și se cere prin formular sau pe WhatsApp. Același buton apare în meniu, în prima secțiune, în blocul de ofertă, după pași, în formular și în subsol.
 
 ### Identitatea vizuală: „Fișa tehnică”
 
@@ -27,13 +27,13 @@ Pagina arată ca dosarul unui inspector: hârtie de plan, cerneală, cote și nu
 
 ## Structura și formula de marketing
 
-**Formula principală este PAS (Problemă, Amplificare, Soluție).** Local, în secțiunea de beneficii, folosesc și **FAB** (Caracteristici, Avantaje, Beneficii). Denumirile formulelor nu apar pe site.
+**Formula principală este PAS (Problemă, Amplificare, Soluție).** Local folosesc și **FAB** (Caracteristici, Avantaje, Beneficii) în tabelul de beneficii, **Hook–Story–Offer** pentru scenariul ilustrativ și blocul de ofertă, și **Proof** (din 4Ps) pentru raportul-model. Denumirile formulelor nu apar pe site.
 
 | Etapa | Unde e în pagină |
 |---|---|
 | **P (Problema)** | Deschiderea: „Agentul din anunț lucrează pentru vânzător. Noi lucrăm pentru tine.” Spune din prima ce oferim, cui și de ce merită să citești mai departe. |
-| **A (Amplificarea)** | Secțiunea 01, „Ce nu scrie în anunț”: patru riscuri concrete, fără cifre inventate (sarcini în CF, metri pătrați fără acte, defecte ascunse, antecontract dezechilibrat). |
-| **S (Soluția)** | Secțiunea 02, „Ce verificăm”: planul interactiv cu cele 5 puncte de verificare, plus tabelul **FAB** „Ce facem / Ce înseamnă / Ce câștigi”. Apoi 03 (tipuri de clădiri), 04 „Cum lucrăm” (4 pași și 3 reguli), 05 Întrebări (obiecțiile: preț, de ce nu agentul din anunț, notar, credit) și 06 formularul, cu „Ce se întâmplă după ce trimiți”. |
+| **A (Amplificarea)** | Secțiunea 01, „Ce nu scrie în anunț”: patru riscuri concrete, fără cifre inventate (sarcini în CF, metri pătrați fără acte, defecte ascunse, antecontract dezechilibrat), apoi un **scenariu tipic** (Andrei, un 2 camere în Mărăști), marcat clar ca exemplu inventat. |
+| **S (Soluția)** | Secțiunea 02, „Ce verificăm”: planul interactiv cu cele 5 puncte de verificare, un **raport-model** (marcat „Exemplu · date inventate”, cu sursele publice: ANCPI, cadastru), tabelul **FAB** „Ce facem / Ce înseamnă / Ce câștigi” și blocul de ofertă **„Verificarea Arcada, înainte de avans”** (tot ce primești, tarif fix, oprire după raport). Apoi 03 (tipuri de clădiri), 04 „Cum lucrăm” (4 pași și 3 reguli), 05 Întrebări (obiecțiile: preț, de ce nu agentul din anunț — inclusiv comisionul de 2–3% + TVA cerut des cumpărătorului —, notar, credit) și 06 formularul, cu „Ce se întâmplă după ce trimiți”. |
 
 Toate elementele cerute sunt pe pagină: banda care rulează (cu buton de oprire), meniul, deschiderea cu video, imaginile, beneficiile, „Cum funcționează”, întrebările frecvente, formularul, subsolul cu date de contact și butonul WhatsApp.
 
