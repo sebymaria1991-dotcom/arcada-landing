@@ -35,6 +35,8 @@ Pagina arată ca dosarul unui inspector: hârtie de plan, cerneală, cote și nu
 | **A (Amplificarea)** | Secțiunea 01, „Ce nu scrie în anunț”: patru riscuri concrete, fără cifre inventate (sarcini în CF, metri pătrați fără acte, defecte ascunse, antecontract dezechilibrat), apoi un **scenariu tipic** (Andrei, un 2 camere în Mărăști), marcat clar ca exemplu inventat. |
 | **S (Soluția)** | Secțiunea 02, „Ce verificăm”: planul interactiv cu cele 5 puncte de verificare, un **raport-model** (marcat „Exemplu · date inventate”, cu sursele publice: ANCPI, cadastru), tabelul **FAB** „Ce facem / Ce înseamnă / Ce câștigi” și blocul de ofertă **„Verificarea Arcada, înainte de avans”** (tot ce primești, tarif fix, oprire după raport). Apoi 03 (tipuri de clădiri), 04 „Cum lucrăm” (4 pași și 3 reguli), 05 Întrebări (obiecțiile: preț, de ce nu agentul din anunț — inclusiv comisionul de 2–3% + TVA cerut des cumpărătorului —, notar, credit) și 06 formularul, cu „Ce se întâmplă după ce trimiți”. |
 
+**Date personale și SEO.** Formularul trimite spre pagina `confidentialitate.html` (cine primește datele, temeiul GDPR, cât le păstrăm, drepturi, ANSPDCP). Mesajul din formular e opțional; numele, e-mailul și telefonul sunt obligatorii. În `<head>` sunt `canonical`, Open Graph cu adrese absolute și date structurate JSON-LD (`RealEstateAgent` + `FAQPage`, generate din întrebările din pagină).
+
 Toate elementele cerute sunt pe pagină: banda care rulează (cu buton de oprire), meniul, deschiderea cu video, imaginile, beneficiile, „Cum funcționează”, întrebările frecvente, formularul, subsolul cu date de contact și butonul WhatsApp.
 
 ## Materiale folosite din folderul pus la dispoziție
@@ -134,7 +136,7 @@ BASE_URL=https://site-ul-public npm test  # rulează testele pe site-ul publicat
 
 | Situația din temă | Ce verifică testul |
 |---|---|
-| Formular gol | 4 erori lângă câmpuri, `aria-invalid`, focus pe primul câmp, nicio cerere trimisă |
+| Formular gol | 3 erori lângă câmpurile obligatorii (mesajul e opțional), `aria-invalid`, focus pe primul câmp, nicio cerere trimisă |
 | E-mail greșit | mesaj explicit („ce e după @”), datele rămân |
 | Telefon invalid | „Numărul nu este valid pentru România (+40)” |
 | Prefix internațional | `+39` → Italia, `+44 7400…` → Regatul Unit, `+44 7911…` → Guernsey, `0049` → Germania |

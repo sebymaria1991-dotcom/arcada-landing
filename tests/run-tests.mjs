@@ -50,12 +50,13 @@ const browser = await chromium.launch({ channel: 'chrome', headless: true });
 console.log(`\nTestez ${BASE}\n`);
 
 /* 1. Formular gol */
-await test('Trimiterea formularului gol: 4 erori lângă câmpuri, nicio cerere trimisă', async (page) => {
+await test('Trimiterea formularului gol: 3 erori lângă câmpurile obligatorii, mesajul e opțional, nicio cerere trimisă', async (page) => {
   await open(page);
   let calls = 0;
   page.on('request', (r) => { if (r.url().includes('/api/contact')) calls++; });
   await page.click('[data-submit]');
-  for (const f of ['name', 'email', 'phone', 'message']) {
+  assert(!(await errText(page, 'message')), 'Mesajul e opțional, dar apare o eroare la el');
+  for (const f of ['name', 'email', 'phone']) {
     const t = await errText(page, f);
     assert(t && t.length > 10, `Lipsește mesajul de eroare pentru ${f}`);
     assert((await page.getAttribute(`[data-field="${f}"] ${f === 'message' ? 'textarea' : 'input:not([type=hidden])'}`, 'aria-invalid')) === 'true', `${f} nu are aria-invalid`);
@@ -200,7 +201,7 @@ await test('Server: validează singur datele, oprește roboții și trimiterile 
   }, [body, xff]);
   const old = Date.now() - 10000;
   const bad = await post({ name: 'A', email: 'x@y', phone: '123', country: 'RO', message: 'scurt', fillMs: 10000 }, ip());
-  assert(bad.status === 422 && Object.keys(bad.body.errors).length === 4, `Validarea pe server: ${JSON.stringify(bad)}`);
+  assert(bad.status === 422 && Object.keys(bad.body.errors).length === 3, `Validarea pe server: ${JSON.stringify(bad)}`);
   const conflict = await post({ name: 'Ana', email: 'a@b.ro', phone: '+447911123456', country: 'RO', message: 'Mesaj destul de lung.', fillMs: 10000 }, ip());
   assert(conflict.status === 422 && /\+44/.test(conflict.body.errors.phone), 'Serverul nu verifică țara numărului');
   const fast = await post({ name: 'Ana', fillMs: 150 }, ip());

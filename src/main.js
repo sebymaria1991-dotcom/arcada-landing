@@ -166,6 +166,15 @@ function initWhatsAppPulse() {
   window.addEventListener('load', () => idle(load, { timeout: 4000 }));
 }
 
+/* Butonul WhatsApp se ascunde cât timp formularul e pe ecran, ca să nu acopere câmpurile */
+function initWaHide() {
+  const wa = document.querySelector('[data-wa]');
+  const card = document.querySelector('.form-card');
+  if (!wa || !card) return;
+  const io = new IntersectionObserver(([entry]) => { wa.toggleAttribute('data-hidden', entry.isIntersecting); }, { threshold: 0.15 });
+  io.observe(card);
+}
+
 function initVideo() {
   // clipul pornește doar la cerere și fără sonor; îl oprim dacă iese din ecran
   const video = document.querySelector('.video');
@@ -181,5 +190,6 @@ initReveal();
 initPlan();
 initVideo();
 initWhatsAppPulse();
+initWaHide();
 initForm(document.querySelector('[data-form]'));
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = String(new Date().getFullYear()); });

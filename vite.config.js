@@ -27,7 +27,7 @@ function contactDetails(env) {
       }
       const phone = parsePhoneNumberFromString(raw.startsWith('+') ? raw : `+${raw}`);
       if (!phone || !phone.isValid()) throw new Error(`WHATSAPP_NUMBER nu e un număr valid: ${raw}`);
-      const text = encodeURIComponent('Bună! Aș vrea să programez o consultație cu Arcada.');
+      const text = encodeURIComponent('Bună! Aș vrea să programez discuția gratuită cu Arcada.');
       const map = {
         __WHATSAPP_URL__: `https://wa.me/${phone.number.slice(1)}?text=${text}`,
         __PHONE_E164__: phone.number,
@@ -46,6 +46,9 @@ export default defineConfig(({ mode }) => {
   }
   return {
     plugins: [localApi(), contactDetails(env)],
-    build: { target: 'es2020', assetsInlineLimit: 0 },
+    build: {
+      target: 'es2020', assetsInlineLimit: 0,
+      rollupOptions: { input: { main: 'index.html', confidentialitate: 'confidentialitate.html' } },
+    },
   };
 });
