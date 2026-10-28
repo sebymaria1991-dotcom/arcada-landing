@@ -148,7 +148,7 @@ BASE_URL=https://site-ul-public npm test  # rulează testele pe site-ul publicat
 | Video, WhatsApp, linkuri | copertă, controale, fără pornire automată, fără sonor, rulează; `wa.me` cu numărul; toate ancorele și fișierele există; nicio imagine fără `alt`; niciun text provizoriu |
 | Mișcare | banda se oprește și pornește din buton; la mișcare redusă stă pe loc, se poate derula și nu mai există animații de apariție |
 
-Ultima rulare, pe site-ul publicat (22.10.2026), cu e-mail real trimis prin Gmail: **19/19 teste trecute**. Local (Vite + SMTP de test Ethereal): tot 19/19.
+Ultima rulare, pe site-ul publicat (28.10.2026, după modificările din auditul de marketing), cu e-mail real trimis prin Gmail: **19/19 teste trecute**. Local (Vite + SMTP de test Ethereal): tot 19/19.
 
 ## Limitări cunoscute
 
