@@ -236,6 +236,7 @@ export function initForm(form) {
   function setHint(text, detected = false) {
     phoneHint.textContent = text;
     phoneHint.classList.toggle('is-detected', detected);
+    phoneHint.classList.toggle('is-shown', text !== defaultHint);
   }
 
   phoneInput.addEventListener('input', () => {
@@ -324,7 +325,7 @@ export function initForm(form) {
     } catch (err) {
       showAlert(
         err.name === 'AbortError'
-          ? 'Serverul a răspuns prea greu și solicitarea nu a fost confirmată. Datele au rămas în formular; încearcă din nou.'
+          ? 'Serverul a răspuns prea încet și solicitarea nu a fost confirmată. Datele au rămas în formular; încearcă din nou.'
           : 'Nu ne-am putut conecta la server. Verifică conexiunea la internet și încearcă din nou. Datele au rămas în formular.'
       );
     } finally {

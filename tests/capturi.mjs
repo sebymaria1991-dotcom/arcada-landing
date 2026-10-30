@@ -23,24 +23,23 @@ const VIEWPORTS = {
 const SECTIONS = [
   ['02-deschidere', '.hero'],
   ['03-problema', '#problema'],
-  ['04-plan-verificari', '.plan'],
-  ['05-raport-model', '.report'],
-  ['06-beneficii', '.spec'],
-  ['07-oferta', '.offer'],
-  ['08-cluj-cladiri', '.city'],
-  ['09-cum-lucram', '#cum-lucram'],
+  ['04-schita-verificari', '.plan'],
+  ['05-ce-primesti', '.deliver'],
+  ['06-tipuri-locuinte', '.city'],
+  ['07-cum-lucram', '#cum-lucram'],
+  ['08-comision', '#comision'],
+  ['09-despre-noi', '#despre-noi'],
   ['10-intrebari', '#intrebari'],
   ['11-formular', '#contact'],
   ['12-subsol', '.footer'],
 ];
 
-// Pagina „înghețată”: fără bandă care rulează și fără apariții animate, ca două rulări să arate la fel.
+// Pagina „înghețată”: fără apariții animate, ca două rulări să arate la fel.
 const FREEZE = `
-  .tape__track { animation: none !important; transform: none !important; }
   [data-reveal] { opacity: 1 !important; transform: none !important; transition: none !important; }
 `;
 // La capturile pe secțiuni ascundem elementele fixe, care altfel apar peste conținut.
-const NO_FIXED = `.nav, .wa, .skip { visibility: hidden !important; }`;
+const NO_FIXED = `.nav, .wa, .skip, .progress, .cookies { visibility: hidden !important; }`;
 
 async function prepare(page, url) {
   await page.goto(url, { waitUntil: 'networkidle' });
@@ -64,6 +63,10 @@ for (const [name, vp] of Object.entries(VIEWPORTS)) {
   const dir = path.join(out, name);
   mkdirSync(dir, { recursive: true });
   const ctx = await browser.newContext({ viewport: { width: vp.width, height: vp.height }, deviceScaleFactor: vp.deviceScaleFactor, reducedMotion: 'reduce' });
+  await ctx.addInitScript(() => {
+    localStorage.setItem('arcada-consent', JSON.stringify({ choice: 'necesar', at: Date.now() }));
+    sessionStorage.setItem('arcada-oferta-vazuta', '1');
+  });
   const page = await ctx.newPage();
 
   await prepare(page, `${BASE}/`);
@@ -90,7 +93,7 @@ writeFileSync(path.join(out, 'DESPRE.txt'), [
   `Data: ${today}`,
   `Sursa: ${BASE}`,
   `Desktop: ${VIEWPORTS.desktop.width}x${VIEWPORTS.desktop.height} · Mobil: ${VIEWPORTS.mobil.width}x${VIEWPORTS.mobil.height} (rezoluție dublă)`,
-  'Banda de sus și animațiile de apariție sunt oprite, ca rulările să poată fi comparate.',
+  'Animațiile de apariție sunt oprite, ca rulările să poată fi comparate.',
   '',
   ...files,
   '',

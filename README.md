@@ -7,37 +7,39 @@ Proiect demonstrativ, educațional. **Arcada este un brand inventat.** Pagina nu
 
 ## Conceptul
 
-**Arcada** este un consultant imobiliar care lucrează **doar pentru cumpărător**, în Cluj-Napoca și împrejurimi. Arcada nu vinde apartamente. Îl ajută pe cel care cumpără: îi verifică actele și starea reală a locuinței, compară prețul cu zona, negociază pentru el și îl însoțește la notar. E plătit cu un tarif fix de cumpărător, nu cu un procent de la vânzător.
+**Arcada** este un consultant imobiliar care lucrează **doar pentru cumpărător**, cu agenți pe teren în toată țara. Arcada nu vinde locuințe. Îl ajută pe cel care cumpără: îi verifică actele și starea reală a locuinței, compară prețul cu zona, negociază pentru el și îl însoțește la notar. E plătit de cumpărător, printr-un comision procentual, nu de vânzător.
 
-**Publicul:** oameni între 28 și 40 de ani care își cumpără primul apartament în Cluj, adesea cu credit ipotecar. Nu cunosc procedurile (carte funciară, cadastru, antecontract) și se tem să nu greșească la cea mai mare cheltuială din viața lor.
+**Publicul:** oameni între 28 și 40 de ani care își cumpără prima locuință, adesea cu credit ipotecar. Nu cunosc procedurile (carte funciară, cadastru, antecontract) și se tem să nu greșească la cea mai mare cheltuială din viața lor.
 
-**Acțiunea principală:** _Programează discuția gratuită_. Prima discuție (30 de minute) e gratuită și se cere prin formular sau pe WhatsApp. Același buton apare în meniu, în prima secțiune, în blocul de ofertă, după pași, în formular și în subsol.
+**Acțiunea principală:** _Vorbește cu un consultant_. Prima discuție (30 de minute) e gratuită și se cere prin formular sau pe WhatsApp.
 
-### Identitatea vizuală: „Fișa tehnică”
-
-Pagina arată ca dosarul unui inspector: hârtie de plan, cerneală, cote și numerotare. Am evitat intenționat tiparele de „pagină generată”: gradienți mov, sticlă (glassmorphism), neon pe fundal negru, carduri rotunjite identice, fontul Inter, teracota și cremul.
+### Identitatea vizuală
 
 | Element | Alegere |
 |---|---|
-| Culori | hârtie rece `#EDEDE7`, cerneală `#141619`, galben de ruletă `#F2C230`; roșu doar pentru erori, verde doar pentru WhatsApp și validare |
-| Fonturi | **Bricolage Grotesque** (titluri condensate cu axa de lățime, plus text) și **IBM Plex Mono** (etichete, cote, butoane), ambele găzduite local |
-| Motive | banda de sus desenată ca o ruletă cu gradații; cote de plan („h 2,60 m”, „11,20 m”); secțiuni numerotate ca fișe (00–06); un plan de apartament interactiv |
-| Butoane | dreptunghiulare, cu umbră plină decalată, ca o ștampilă, și o fâșie de lumină la hover |
-| Imagini | fotografii cu saturație redusă, cu chenar de cerneală, ca să se lege de paletă |
+| Culori | hârtie `#F2F0E9`, cerneală-petrol `#13292C`, ocru stins `#D9C48A`, verde-petrol `#2E6E68`; verde WhatsApp doar pentru contact; roșu doar pentru erori |
+| Fonturi | **Bricolage Grotesque** (titluri și text) și **IBM Plex Mono** (etichete), găzduite local |
+| Motive | arcada din siglă; o schiță izometrică interactivă, cu pereți transparenți și straturi care se aprind |
+| Butoane | plate, cu colțuri ușor rotunjite, fără umbre 3D, cu o fâșie de lumină la hover |
+| Animații | Motion: titluri cuvânt cu cuvânt, apariții în cascadă, parallax, bara de progres, linia etapelor. Toate se opresc la mișcare redusă |
 
 ## Structura și formula de marketing
 
-**Formula principală este PAS (Problemă, Amplificare, Soluție).** Local folosesc și **FAB** (Caracteristici, Avantaje, Beneficii) în tabelul de beneficii, **Hook–Story–Offer** pentru scenariul ilustrativ și blocul de ofertă, și **Proof** (din 4Ps) pentru raportul-model. Denumirile formulelor nu apar pe site.
+**Formula principală este PAS (Problemă, Amplificare, Soluție).** Local folosesc și **FAB** în „Ce primești” și **Hook–Story–Offer** în „Scenariu tipic” și în oferta din pop-up. Denumirile formulelor nu apar pe site.
 
 | Etapa | Unde e în pagină |
 |---|---|
-| **P (Problema)** | Deschiderea: „Agentul din anunț lucrează pentru vânzător. Noi lucrăm pentru tine.” Spune din prima ce oferim, cui și de ce merită să citești mai departe. |
-| **A (Amplificarea)** | Secțiunea 01, „Ce nu scrie în anunț”: patru riscuri concrete, fără cifre inventate (sarcini în CF, metri pătrați fără acte, defecte ascunse, antecontract dezechilibrat), apoi un **scenariu tipic** (Andrei, un 2 camere în Mărăști), marcat clar ca exemplu inventat. |
-| **S (Soluția)** | Secțiunea 02, „Ce verificăm”: planul interactiv cu cele 5 puncte de verificare, un **raport-model** (marcat „Exemplu · date inventate”, cu sursele publice: ANCPI, cadastru), tabelul **FAB** „Ce facem / Ce înseamnă / Ce câștigi” și blocul de ofertă **„Verificarea Arcada, înainte de avans”** (tot ce primești, tarif fix, oprire după raport). Apoi 03 (tipuri de clădiri), 04 „Cum lucrăm” (4 pași și 3 reguli), 05 Întrebări (obiecțiile: preț, de ce nu agentul din anunț — inclusiv comisionul de 2–3% + TVA cerut des cumpărătorului —, notar, credit) și 06 formularul, cu „Ce se întâmplă după ce trimiți”. |
+| **P (Problema)** | Deschiderea: „Știi ce cumperi înainte să semnezi.” |
+| **A (Amplificarea)** | „Ce nu scrie în anunț”: patru riscuri concrete și „Scenariu tipic” (ce vezi tu, ce descoperim noi, ce obții). |
+| **S (Soluția)** | „Ce verificăm” (schița și cele cinci verificări), „Ce primești”, tipurile de locuințe, „Cum lucrăm” (4 etape și 3 reguli), „Comision”, „Despre noi”, „Întrebări” și contactul, cu „Ce se întâmplă după ce ne scrii”. |
 
-**Date personale și SEO.** Formularul trimite spre pagina `confidentialitate.html` (cine primește datele, temeiul GDPR, cât le păstrăm, drepturi, ANSPDCP). Mesajul din formular e opțional; numele, e-mailul și telefonul sunt obligatorii. În `<head>` sunt `canonical`, Open Graph cu adrese absolute și date structurate JSON-LD (`RealEstateAgent` + `FAQPage`, generate din întrebările din pagină).
+**Comisionul:** pagina vorbește despre un procent, fără cifră. Când există procentul real, pune `COMMISSION_PERCENT` în `.env.local` și în Vercel: valoarea apare singură în secțiunea „Comision”.
 
-Toate elementele cerute sunt pe pagină: banda care rulează (cu buton de oprire), meniul, deschiderea cu video, imaginile, beneficiile, „Cum funcționează”, întrebările frecvente, formularul, subsolul cu date de contact și butonul WhatsApp.
+**Date personale:** paginile `confidentialitate.html`, `cookies.html` și `termeni.html` sunt generate de `scripts/pagini-legale.mjs`. Mesajul din formular e opțional. Sistemul de consimțământ (`src/consent.js`) are trei opțiuni distincte: **Acceptă** (alegerea și preferințele se păstrează 6 luni), **Acceptă strictul necesar** (doar alegerea, 6 luni) și **Refuză** (nu rămâne nimic după închiderea browserului). Site-ul nu pune cookie-uri HTTP și nu are scripturi de urmărire.
+
+**Oferta din pop-up:** analiza gratuită a anunțului. Apare la intrare, după alegerea privind cookie-urile, o singură dată pe sesiune. Când e închis, rămâne ca etichetă în meniu, de unde se poate redeschide. Nu apare peste formular.
+
+**SEO:** `canonical`, Open Graph și JSON-LD (`RealEstateAgent` + `FAQPage`). Întrebările din JSON-LD se citesc automat din pagină, la build.
 
 ## Materiale folosite din folderul pus la dispoziție
 
@@ -47,17 +49,18 @@ Din `Materiale ajutatoare AI/Materiale AI de folosit/Assets-Library/`:
 |---|---|---|
 | Bricolage Grotesque | `fonts/bricolage-grotesque/` | fontul principal, cu axele de greutate și lățime |
 | IBM Plex Mono | `fonts/ibm-plex-mono/` (400, 500) | etichete, cote, butoane, banda de sus |
-| Font Awesome Free 7.3.0 | `fontawesome/.../svgs/` | 23 de iconuri, extrase într-un singur fișier `public/icons.svg` (9 KB, în loc de 900 KB de font) |
+| Font Awesome Free 7.3.0 | `fontawesome/.../svgs/` | 54 de iconuri, extrase într-un singur fișier `public/icons.svg` (în loc de 900 KB de font) |
 | Shine Sweep Effect | `animations/cod3power/shine-sweep-effect/` | fâșia de lumină care trece peste butoane la hover, recolorată pentru brand |
 | CSS Animated Bubble Indicator | `animations/cod3power/css-animated-bubble-Indicator/` | indicatorul galben din meniu, rescris în JS ca să urmărească secțiunea curentă și linkul de sub mouse |
 | HTML Form Validation (Native) | `animations/whatsapp/html-form-validation-native/` | modelul cu câmpuri „atinse” (`is-valid` / `is-invalid` / `flash`): erorile apar după ce părăsești câmpul, nu de la prima literă |
 | Lottie: `pulse.json` + `lottie.min.js` | `animations/lottie/` | pulsul din spatele butonului WhatsApp, încărcat abia după ce pagina e liberă și dezactivat la mișcare redusă |
+| Motion | [motion.dev](https://motion.dev), MIT | animațiile de text și de derulare |
 
 Ca idei, fără cod copiat: motivul cu cote și plan vine din șabloanele HorizonX (`Horizonx/2026-10-octombrie/rootline-hero`, land intelligence), iar ghidurile din `Cursuri/code3power-materiale/06_Design_Taste` au dat scara tipografică (5 mărimi, raport 1,333), regulile de spațiere a literelor și animațiile cu măsură.
 
 ### Materiale externe, cu drept de utilizare
 
-- **Fotografii și clip:** [Pexels](https://www.pexels.com/license/), licență gratuită, inclusiv comercială, fără atribuire obligatorie. ID-uri: clip `7347597`; fotografii `13736784`, `36782639`, `33094438`, `8123134`, `9826456`, `8297489`, `7578992`.
+- **Fotografii și clip:** [Pexels](https://www.pexels.com/license/), licență gratuită, inclusiv comercială, fără atribuire obligatorie. ID-uri: clip `7348062`; fotografii `7944926`, `7865621`, `13736784`, `36782639`, `33094438`, `8123134`, `9826456`, `8297489`, `7578992`, `7642000`.
 - **Steaguri:** [flag-icons](https://github.com/lipis/flag-icons), licență MIT (`public/flags/LICENSE-flag-icons.txt`).
 - **Validarea telefonului:** [libphonenumber-js](https://gitlab.com/catamphetamine/libphonenumber-js), MIT, cu metadatele complete (`/max`).
 - **Trimiterea e-mailurilor:** [Nodemailer](https://nodemailer.com), MIT-0. Ideea de a trimite gratuit prin Gmail vine din linkul `Cursuri/email-gratis`.
@@ -129,7 +132,7 @@ Varianta din terminal: `npx vercel login`, apoi `npx vercel --prod`.
 
 ```bash
 npm run dev           # într-un terminal
-npm test              # în altul: 19 teste automate în Chrome (playwright-core)
+npm test              # în altul: testele automate în Chrome (playwright-core)
 TEST_EMAIL=adresa@ta.ro npm test          # trimite și un e-mail real la adresa ta
 BASE_URL=https://site-ul-public npm test  # rulează testele pe site-ul publicat
 ```
@@ -148,15 +151,22 @@ BASE_URL=https://site-ul-public npm test  # rulează testele pe site-ul publicat
 | Mobil și calculator | 360, 390, 768 și 1440 px: fără derulare orizontală, meniul mobil se deschide și se închide |
 | Tastatură | link de salt, bandă, meniu, plan (Enter), întrebări (Enter), lista de țări (săgeți, Escape, focusul revine) |
 | Video, WhatsApp, linkuri | copertă, controale, fără pornire automată, fără sonor, rulează; `wa.me` cu numărul; toate ancorele și fișierele există; nicio imagine fără `alt`; niciun text provizoriu |
-| Mișcare | banda se oprește și pornește din buton; la mișcare redusă stă pe loc, se poate derula și nu mai există animații de apariție |
+| Mișcare | la mișcare redusă nu există animații de apariție, iar conținutul e vizibil |
+| Primul ecran | 1920×1080, 1440×900, 1366×768, 1280×720, 390×844: tot conținutul se vede fără derulare |
+| Conținut | fără numerotări decorative și fără textele eliminate; secțiunile noi există; JSON-LD are toate întrebările |
+| Contact | WhatsApp e cerc verde; „Formular” duce la formular și pune cursorul în primul câmp |
+| Cookie-uri | trei opțiuni distincte, alegerea respectată, „Setări cookies” o poate schimba, niciun cookie nedeclarat |
+| Pop-up | apare la intrare după alegerea privind cookie-urile, o singură dată; se închide cu X sau Escape; eticheta din meniu îl redeschide; duce la formular |
+| Pagini legale | se deschid din subsol, fără texte provizorii |
 
-Ultima rulare, pe site-ul publicat (28.10.2026, după modificările din auditul de marketing), cu e-mail real trimis prin Gmail: **19/19 teste trecute**. Local (Vite + SMTP de test Ethereal): tot 19/19.
+Ultima rulare locală (30.10.2026, după refacerea paginii): vezi jurnalul din 30.10.2026. Ultima rulare pe site-ul publicat, cu e-mail real prin Gmail, e din 28.10.2026, pe versiunea anterioară.
 
 ## Limitări cunoscute
 
 - **Limita de trimiteri** e ținută în memoria funcției serverless, deci se resetează când Vercel pornește o instanță nouă. Pentru un formular de contact e o protecție de bază. Pentru trafic mare ar trebui o bază de date (de exemplu Upstash Redis, gratuit).
 - **Gmail** poate pune primul e-mail în Spam sau Promoții, fiindcă vine de la o adresă `@gmail.com`, nu de pe un domeniu propriu. Mesajul de succes de pe site îi spune omului să verifice și acolo.
 - **Adresa de e-mail nu este verificată** (fără link de confirmare). Primești doar confirmarea că solicitarea a ajuns.
+- **Bara de sus care rulează**, cerută în tema inițială, a fost scoasă la cererea autorului. La predare, acest punct din cerință nu mai e acoperit.
 - **Planul Hobby Vercel** e pentru proiecte personale și necomerciale, potrivit pentru o demonstrație educațională.
 
 ## Structura proiectului
@@ -164,7 +174,10 @@ Ultima rulare, pe site-ul publicat (28.10.2026, după modificările din auditul 
 ```
 index.html            pagina (texte, structură, SVG-ul planului)
 src/styles.css        identitatea vizuală (tokeni, layout, stări)
-src/main.js           banda, meniul, apariții, planul, video, pulsul WhatsApp
+src/main.js           meniul, animațiile Motion, schița, video, pulsul WhatsApp, pop-up-ul
+src/consent.js        cookie-uri: cele trei opțiuni și memorarea alegerii
+src/plan-izometric.html  schița generată de scripts/plan-izometric.mjs
+scripts/              generatoarele pentru schiță, paginile legale și iconuri
 src/form.js           selectorul de țară și logica formularului
 lib/validate.js       reguli de validare comune pentru browser și server
 lib/emails.js         șabloanele de e-mail (confirmare + notificare)

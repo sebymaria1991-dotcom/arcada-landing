@@ -1,40 +1,9 @@
+import { animate, inView, scroll, stagger } from 'motion';
 import { initForm } from './form.js';
+import { initConsent, getConsent, offerSeen, markOfferSeen } from './consent.js';
 
-document.documentElement.classList.add('js');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
-
-/* Bara de sus: banda care rulează și poate fi oprită --------------------- */
-function initTicker() {
-  const tape = document.querySelector('.tape');
-  const track = tape?.querySelector('[data-ticker]');
-  const toggle = tape?.querySelector('[data-ticker-toggle]');
-  if (!track || !toggle) return;
-
-  // dublăm conținutul ca bucla să fie continuă; copia e ascunsă cititoarelor de ecran
-  [...track.children].forEach((li) => {
-    const copy = li.cloneNode(true);
-    copy.setAttribute('aria-hidden', 'true');
-    track.appendChild(copy);
-  });
-
-  const label = toggle.querySelector('[data-ticker-label]');
-  const icon = toggle.querySelector('use');
-  let paused = false;
-  try { paused = localStorage.getItem('arcada-tape') === 'paused'; } catch { /* stocare indisponibilă */ }
-
-  const render = () => {
-    tape.toggleAttribute('data-paused', paused);
-    toggle.setAttribute('aria-pressed', String(paused));
-    label.textContent = paused ? 'Pornește banda' : 'Oprește banda';
-    icon.setAttribute('href', `/icons.svg#i-${paused ? 'play' : 'pause'}`);
-  };
-  toggle.addEventListener('click', () => {
-    paused = !paused;
-    try { localStorage.setItem('arcada-tape', paused ? 'paused' : 'running'); } catch { /* ignorăm */ }
-    render();
-  });
-  render();
-}
+const EASE = [0.2, 0.7, 0.1, 1];
 
 /* Meniu: hamburger pe mobil, indicator pe desktop, secțiunea curentă ------ */
 function initNav() {
@@ -62,7 +31,7 @@ function initNav() {
   });
   window.matchMedia('(min-width: 1040px)').addEventListener('change', () => setOpen(false));
 
-  // indicatorul galben se mută sub linkul peste care ești sau sub secțiunea curentă
+  // indicatorul se mută sub linkul peste care ești sau sub secțiunea curentă
   let current = null;
   const moveBubble = (a) => {
     if (!bubble) return;
@@ -93,7 +62,7 @@ function initNav() {
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
   sections.forEach((s) => io.observe(s));
-  // în afara secțiunilor din meniu (deschidere, contact) nu marcăm nimic
+  // în afara secțiunilor din meniu nu marcăm nimic
   const clear = new IntersectionObserver((entries) => {
     entries.forEach((entry) => {
       if (entry.isIntersecting) {
@@ -103,48 +72,102 @@ function initNav() {
       }
     });
   }, { rootMargin: '-45% 0px -50% 0px' });
-  ['#inceput', '#contact'].forEach((id) => { const el = document.querySelector(id); if (el) clear.observe(el); });
+  ['#inceput', '#problema', '#contact'].forEach((id) => { const el = document.querySelector(id); if (el) clear.observe(el); });
 }
 
-/* Apariții la derulare --------------------------------------------------- */
-function initReveal() {
-  const items = document.querySelectorAll('[data-reveal]');
-  if (reduceMotion.matches || !('IntersectionObserver' in window)) {
-    items.forEach((el) => el.classList.add('is-in'));
+/* Animații cu Motion: toate se opresc dacă omul a cerut mișcare redusă ---- */
+function initMotion() {
+  const reveals = document.querySelectorAll('[data-reveal]');
+  if (reduceMotion.matches) {
+    reveals.forEach((el) => el.classList.add('is-in'));
     return;
   }
-  const io = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('is-in');
-        io.unobserve(entry.target);
-      }
-    });
-  }, { rootMargin: '0px 0px -8% 0px', threshold: 0.12 });
-  items.forEach((el) => io.observe(el));
+
+  // deschiderea: rândurile titlului urcă din spatele unei măști, restul apare în cascadă
+  animate('[data-hero-line]', { y: ['105%', '0%'] }, { duration: 0.9, delay: stagger(0.12), ease: EASE });
+  animate('[data-hero]', { opacity: [0, 1], y: [16, 0] }, { duration: 0.7, delay: stagger(0.09, { startDelay: 0.25 }), ease: EASE });
+  animate('.hl', { backgroundSize: ['0% 100%', '100% 100%'] }, { duration: 0.8, delay: 0.75, ease: EASE });
+
+  // bara de progres de sus urmărește derularea
+  scroll(animate('[data-progress]', { scaleX: [0, 1] }, { ease: 'linear' }));
+
+  // titlurile apar cuvânt cu cuvânt
+  document.querySelectorAll('[data-words]').forEach((title) => {
+    const words = title.textContent.trim().split(/\s+/);
+    title.setAttribute('aria-label', title.textContent.trim());
+    title.innerHTML = words.map((w) => `<span class="w" aria-hidden="true"><span>${w}</span></span>`).join(' ');
+    const inner = title.querySelectorAll('.w > span');
+    animate(inner, { y: '110%' }, { duration: 0 });
+    inView(title, () => {
+      animate(inner, { y: '0%' }, { duration: 0.7, delay: stagger(0.035), ease: EASE });
+    }, { amount: 0.4 });
+  });
+
+  // elementele apar la derulare, în cascadă față de frații lor
+  inView('[data-reveal]', (el) => {
+    const siblings = [...el.parentElement.children].filter((c) => c.hasAttribute('data-reveal'));
+    const delay = Math.max(0, siblings.indexOf(el)) * 0.08;
+    el.classList.add('is-in');
+    animate(el, { opacity: [0, 1], y: [24, 0] }, { duration: 0.7, delay, ease: EASE });
+  }, { amount: 0.12, margin: '0px 0px -6% 0px' });
+
+  // imaginile se mișcă ușor mai lent decât pagina
+  document.querySelectorAll('[data-parallax]').forEach((img) => {
+    scroll(animate(img, { y: ['-5%', '5%'], scale: [1.12, 1.12] }, { ease: 'linear' }), { target: img.parentElement, offset: ['start end', 'end start'] });
+  });
+
+  // în „Cum lucrăm”, linia coboară la derulare și aprinde pe rând fiecare etapă
+  const timeline = document.querySelector('[data-timeline]');
+  if (timeline) {
+    const steps = [...timeline.querySelectorAll('.timeline__step')];
+    const last = steps.length - 1;
+    timeline.classList.add('is-live');
+    scroll((progress) => {
+      const reached = progress * last;
+      steps.forEach((step, i) => {
+        step.style.setProperty('--fill', Math.min(1, Math.max(0, reached - i)));
+        step.classList.toggle('is-lit', reached >= i - 0.02);
+      });
+    }, { target: timeline, offset: ['start 70%', 'end 65%'] });
+  }
 }
 
-/* Planul interactiv: punctele de pe desen și lista sunt legate ------------ */
+/* Schița interactivă: punctele, graficul și straturile din desen sunt legate */
 function initPlan() {
   const root = document.querySelector('[data-plan]');
   if (!root) return;
   const pins = [...root.querySelectorAll('[data-pin]')];
   const items = [...root.querySelectorAll('[data-item]')];
+  const nodes = [...root.querySelectorAll('[data-item-btn]')];
+  const layers = [...root.querySelectorAll('[data-layer]')];
+  const dial = root.querySelector('[data-dial]');
+  const title = root.querySelector('[data-dial-title]');
+  let current = -1;
 
-  const select = (i, { scroll = false } = {}) => {
-    items.forEach((item, n) => {
-      const open = n === i;
-      item.classList.toggle('is-open', open);
-      item.querySelector('[data-item-btn]').setAttribute('aria-expanded', String(open));
-    });
+  const select = (i, { scroll: move = false } = {}) => {
+    if (i === current) return;
+    current = i;
+    items.forEach((item, n) => item.classList.toggle('is-open', n === i));
+    nodes.forEach((node, n) => node.setAttribute('aria-expanded', String(n === i)));
     pins.forEach((pin, n) => pin.setAttribute('aria-pressed', String(n === i)));
-    if (scroll && window.matchMedia('(max-width: 959px)').matches) {
-      items[i].scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'nearest' });
+    layers.forEach((g) => g.classList.toggle('is-on', Number(g.dataset.layer) === i));
+    nodes.forEach((node, n) => node.classList.toggle('is-done', n < i));
+    title.textContent = nodes[i].dataset.title;
+    if (!reduceMotion.matches) {
+      animate(title, { opacity: [0, 1], scale: [0.94, 1] }, { duration: 0.35, ease: EASE });
+      animate(items[i].querySelectorAll('.flow li'), { opacity: [0, 1], x: [-10, 0] }, { duration: 0.35, delay: stagger(0.06), ease: EASE });
+    }
+    if (move && window.matchMedia('(max-width: 959px)').matches) {
+      dial.scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth', block: 'nearest' });
     }
   };
   pins.forEach((pin, i) => pin.addEventListener('click', () => select(i, { scroll: true })));
-  items.forEach((item, i) => item.querySelector('[data-item-btn]').addEventListener('click', () => select(i)));
+  nodes.forEach((node, i) => node.addEventListener('click', () => select(i)));
   select(0);
+  // treptele cresc pe rând când graficul intră în ecran
+  if (!reduceMotion.matches) {
+    inView(dial, () => { animate(nodes, { scaleY: [0, 1] }, { duration: 0.6, delay: stagger(0.08), ease: EASE }); });
+  }
 }
 
 /* WhatsApp: pulsul Lottie din Assets-Library, încărcat doar când pagina e liberă */
@@ -184,12 +207,68 @@ function initVideo() {
   io.observe(video);
 }
 
-initTicker();
+/* Butonul „Formular”: duce la formular și pune cursorul în primul câmp ---- */
+function goToForm(e) {
+  const name = document.querySelector('#f-name');
+  if (!name || name.closest('[hidden]')) return;
+  // facem noi derularea: ancora obișnuită ar lua focusul din câmp
+  e.preventDefault();
+  document.querySelector('#formular').scrollIntoView({ behavior: reduceMotion.matches ? 'auto' : 'smooth' });
+  name.focus({ preventScroll: true });
+}
+
+/* Pop-up cu oferta: la intrare, după cookie-uri; apoi rămâne ca etichetă în meniu */
+function initOffer() {
+  const dialog = document.querySelector('[data-offer]');
+  const pill = document.querySelector('[data-offer-pill]');
+  if (!dialog || !pill) return;
+  const ENTRY_DELAY_MS = 700;
+
+  const open = () => {
+    if (dialog.open) return;
+    dialog.showModal();
+    if (!reduceMotion.matches) animate(dialog, { opacity: [0, 1], y: [28, 0], scale: [0.97, 1] }, { duration: 0.5, ease: EASE });
+  };
+  const showPill = () => {
+    if (!pill.hidden) return;
+    pill.hidden = false;
+    if (!reduceMotion.matches) animate(pill, { opacity: [0, 1], scale: [0.8, 1] }, { duration: 0.4, ease: EASE });
+  };
+  const close = () => { if (dialog.open) dialog.close(); };
+
+  const onEntry = () => {
+    if (offerSeen()) { showPill(); return; }
+    // cine a intrat direct la contact sau completează formularul nu e întrerupt
+    const contact = document.querySelector('#contact')?.getBoundingClientRect();
+    if (document.activeElement?.closest('[data-form]') || (contact && contact.top < window.innerHeight && contact.bottom > 0)) { showPill(); return; }
+    markOfferSeen();
+    open();
+  };
+
+  dialog.addEventListener('close', showPill);
+  dialog.querySelectorAll('[data-offer-close]').forEach((b) => b.addEventListener('click', close));
+  dialog.addEventListener('click', (e) => { if (e.target === dialog) close(); });
+  pill.addEventListener('click', open);
+  dialog.querySelector('[data-offer-cta]').addEventListener('click', (e) => {
+    close();
+    const message = document.querySelector('#f-message');
+    if (message && !message.value) message.value = 'Aș vrea analiza gratuită a anunțului: ';
+    goToForm(e);
+  });
+
+  const start = () => setTimeout(onEntry, ENTRY_DELAY_MS);
+  if (getConsent()) start();
+  else window.addEventListener('arcada:consent', start, { once: true });
+}
+
+initConsent();
 initNav();
-initReveal();
+initMotion();
 initPlan();
 initVideo();
 initWhatsAppPulse();
 initWaHide();
 initForm(document.querySelector('[data-form]'));
+initOffer();
+document.querySelectorAll('[data-go-form]').forEach((a) => a.addEventListener('click', goToForm));
 document.querySelectorAll('[data-year]').forEach((el) => { el.textContent = String(new Date().getFullYear()); });

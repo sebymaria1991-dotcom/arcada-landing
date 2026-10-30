@@ -14,8 +14,15 @@ mkdirSync(OUT, { recursive: true });
 const results = [];
 const ip = () => `10.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}.${Math.floor(Math.random() * 250)}`;
 
-async function test(name, fn, { viewport = { width: 1280, height: 860 }, reducedMotion, ownIp = false } = {}) {
+async function test(name, fn, { viewport = { width: 1280, height: 860 }, reducedMotion, ownIp = false, fresh = false } = {}) {
   const ctx = await browser.newContext({ viewport, reducedMotion, extraHTTPHeaders: ownIp ? {} : { 'x-forwarded-for': ip() } });
+  // implicit, vizitatorul și-a ales deja cookie-urile și a văzut oferta, ca bannerul și pop-up-ul să nu stea în calea testelor
+  if (!fresh) {
+    await ctx.addInitScript(() => {
+      localStorage.setItem('arcada-consent', JSON.stringify({ choice: 'necesar', at: Date.now() }));
+      sessionStorage.setItem('arcada-oferta-vazuta', '1');
+    });
+  }
   const page = await ctx.newPage();
   const errors = [];
   page.on('pageerror', (e) => errors.push(e.message));
@@ -238,7 +245,7 @@ for (const vp of [{ width: 360, height: 780 }, { width: 390, height: 844 }, { wi
 }
 
 /* 12. Tastatură */
-await test('Navigare cu tastatura: link de salt, bandă, meniu, plan, formular', async (page) => {
+await test('Navigare cu tastatura: link de salt, meniu, schiță, formular', async (page) => {
   await open(page);
   const order = [];
   for (let i = 0; i < 40; i++) {
@@ -249,12 +256,12 @@ await test('Navigare cu tastatura: link de salt, bandă, meniu, plan, formular',
     }));
   }
   assert(order[0] === '#continut', `Primul Tab nu ajunge la „Sari la conținut”: ${order[0]}`);
-  assert(order.some((o) => o.includes('tape__toggle')), 'Butonul benzii nu e accesibil din tastatură');
   assert(order.includes('#intrebari'), 'Meniul nu e accesibil din tastatură');
-  // pe plan: Enter pe un punct deschide descrierea
+  // pe schiță: Enter pe un punct deschide descrierea și aprinde stratul din desen
   await page.focus('[data-pin="2"]');
   await page.keyboard.press('Enter');
-  assert(await page.locator('#punct-2').evaluate((el) => el.classList.contains('is-open')), 'Punctul 3 nu se deschide cu Enter');
+  assert(await page.locator('#punct-2').evaluate((el) => el.classList.contains('is-open')), 'Punctul nu se deschide cu Enter');
+  assert(await page.locator('[data-layer="2"]').evaluate((g) => g.classList.contains('is-on')), 'Stratul din schiță nu se aprinde');
   // întrebări frecvente: <summary> cu Enter
   await page.focus('.qa:nth-child(2) summary');
   await page.keyboard.press('Enter');
@@ -269,11 +276,11 @@ await test('Navigare cu tastatura: link de salt, bandă, meniu, plan, formular',
   assert(await page.evaluate(() => document.activeElement.matches('[data-country-btn]')), 'Focusul nu revine pe buton');
 });
 
-/* 13. Video, WhatsApp, linkuri, bandă */
+/* 13. Video, WhatsApp, linkuri */
 await test('Video: copertă, controale, fără pornire automată și fără sonor', async (page) => {
   await open(page);
   const v = await page.$eval('.video', (v) => ({ poster: v.poster, controls: v.controls, autoplay: v.autoplay, muted: v.muted, paused: v.paused, preload: v.preload }));
-  assert(v.poster.endsWith('vizionare-coperta.webp') && v.controls && !v.autoplay && v.muted && v.paused, JSON.stringify(v));
+  assert(v.poster.endsWith('verificare-coperta.webp') && v.controls && !v.autoplay && v.muted && v.paused, JSON.stringify(v));
   const poster = await page.evaluate(async (u) => (await fetch(u)).status, v.poster);
   assert(poster === 200, 'Coperta nu se încarcă');
   await page.$eval('.video', (v) => v.play());
@@ -307,26 +314,122 @@ await test('WhatsApp și toate linkurile: wa.me cu numărul configurat, ancore v
   assert(noAlt === 0, `${noAlt} imagini fără atribut alt`);
 });
 
-await test('Banda de sus: rulează, se oprește și pornește din buton', async (page) => {
+await test('Mișcare redusă: fără animații de apariție, conținutul e vizibil', async (page) => {
   await open(page);
-  const state = () => page.$eval('.tape__track', (t) => getComputedStyle(t).animationPlayState);
-  await page.mouse.move(10, 600);
-  assert((await state()) === 'running', 'Banda nu rulează');
-  await page.click('[data-ticker-toggle]');
-  await page.mouse.move(10, 600);
-  assert((await state()) === 'paused' && (await page.getAttribute('[data-ticker-toggle]', 'aria-pressed')) === 'true', 'Banda nu se oprește');
-  await page.click('[data-ticker-toggle]');
-  await page.mouse.move(10, 600);
-  assert((await state()) === 'running', 'Banda nu repornește');
+  for (const sel of ['.risk', '.hero__lead', '[data-hero-line]']) {
+    const op = await page.$eval(sel, (r) => getComputedStyle(r).opacity);
+    assert(op === '1', `${sel} rămâne ascuns când mișcarea e redusă`);
+  }
+}, { reducedMotion: 'reduce' });
+
+/* 14. Primul ecran */
+for (const vp of [{ width: 1920, height: 1080 }, { width: 1440, height: 900 }, { width: 1366, height: 768 }, { width: 1280, height: 720 }, { width: 390, height: 844 }]) {
+  await test(`Primul ecran ${vp.width}×${vp.height}: tot conținutul se vede fără derulare`, async (page) => {
+    await open(page);
+    const jos = await page.evaluate(() => Math.max(...['.hero__index', '.first-talk', '.video', '.hero__actions'].map((s) => document.querySelector(s).getBoundingClientRect().bottom)));
+    assert(jos <= vp.height, `Conținutul coboară până la ${Math.round(jos)}px`);
+  }, { viewport: vp });
+}
+
+/* 15. Conținut */
+await test('Conținut: fără numerotări decorative, fără texte și date eliminate, cu secțiunile noi', async (page) => {
+  await open(page);
+  const text = await page.evaluate(() => document.body.innerText);
+  for (const interzis of ['Pornește banda', 'Oprește banda', 'Fig. 1', 'Exemplu inventat', 'exemplu inventat', 'date inventate', 'Unde și când', 'tarif fix', 'Tarif fix', 'Programează discuția', 'Andrei', 'Fișa 00', ' mp']) {
+    assert(!text.includes(interzis), `Textul „${interzis}” e încă pe pagină`);
+  }
+  assert(!/(^|\n)\s*0\d\b/.test(text), 'A rămas o numerotare de tip 01, 02');
+  for (const nou of ['Despre noi', 'În toată țara', 'Program', 'Scenariu tipic', 'Un comision procentual', 'Unele ilustrații și animații de pe site sunt realizate cu ajutorul inteligenței artificiale.', 'agenți pe teren în toată țara']) {
+    assert(text.toLowerCase().includes(nou.toLowerCase()), `Lipsește „${nou}”`);
+  }
+  assert(await page.isVisible('.menu__list a[href="#despre-noi"]'), 'Meniul nu are „Despre noi”');
+  assert(await page.locator('.footer img').count() === 1 && await page.isVisible('.footer__anpc img'), 'Subsolul trebuie să aibă doar sigla ANPC');
+  const ld = JSON.parse(await page.textContent('script[type="application/ld+json"]'));
+  const faq = ld['@graph'].find((g) => g['@type'] === 'FAQPage').mainEntity;
+  assert(faq.length === await page.locator('.qa').count(), 'Datele structurate nu au toate întrebările');
+  assert(faq.some((q) => /toată țara/.test(q.acceptedAnswer.text)), 'Datele structurate nu au răspunsul despre zone');
 });
 
-await test('Mișcare redusă: banda stă pe loc și poate fi derulată, fără animații de apariție', async (page) => {
+/* 16. WhatsApp și butoanele de contact */
+await test('WhatsApp rotund și verde; „Formular” duce la formular și pune cursorul în primul câmp', async (page) => {
   await open(page);
-  const anim = await page.$eval('.tape__track', (t) => getComputedStyle(t).animationName);
-  assert(anim === 'none', `Banda încă se mișcă: ${anim}`);
-  const op = await page.$eval('.risk', (r) => getComputedStyle(r).opacity);
-  assert(op === '1', 'Elementele rămân ascunse când mișcarea e redusă');
-}, { reducedMotion: 'reduce' });
+  const wa = await page.$eval('[data-wa]', (a) => { const c = getComputedStyle(a); const r = a.getBoundingClientRect(); return { w: r.width, h: r.height, radius: c.borderRadius, bg: c.backgroundColor }; });
+  assert(wa.w === wa.h && wa.w <= 60 && wa.radius === '50%', `Butonul nu e un cerc mic: ${JSON.stringify(wa)}`);
+  assert(wa.bg === 'rgb(37, 211, 102)', `Butonul nu e verde: ${wa.bg}`);
+  assert(/^https:\/\/wa\.me\//.test(await page.getAttribute('[data-contact-wa]', 'href')), 'Butonul din contact nu duce la WhatsApp');
+  await page.click('[data-go-form]');
+  await page.waitForTimeout(1000);
+  assert(await page.evaluate(() => document.activeElement.id === 'f-name'), 'Cursorul nu e în primul câmp');
+  assert(await page.locator('.form-card').isVisible(), 'Formularul nu e vizibil');
+});
+
+/* 17. Cookie-uri */
+await test('Cookie-uri: trei opțiuni distincte, alegerea e respectată și poate fi schimbată', async (page, ctx) => {
+  await open(page);
+  assert(await page.isVisible('[data-cookies]'), 'Bannerul nu apare la prima vizită');
+  assert((await page.locator('[data-cookies] [data-consent]').allTextContents()).join('|') === 'Acceptă|Acceptă strictul necesar|Refuză', 'Butoanele nu sunt cele cerute');
+  const stocat = () => page.evaluate(() => ({ l: localStorage.getItem('arcada-consent'), s: sessionStorage.getItem('arcada-consent-sesiune') }));
+
+  await page.click('[data-consent="refuz"]');
+  assert(await page.isHidden('[data-cookies]'), 'Bannerul nu se închide');
+  let s = await stocat();
+  assert(!s.l && s.s === 'refuz', `Refuzul a lăsat date: ${JSON.stringify(s)}`);
+  await page.reload({ waitUntil: 'networkidle' });
+  assert(await page.isHidden('[data-cookies]'), 'Refuzul nu e ținut minte în sesiune');
+
+  await page.click('[data-cookie-settings]');
+  assert(await page.isVisible('[data-cookies]'), '„Setări cookies” nu redeschide bannerul');
+  await page.click('[data-consent="necesar"]');
+  s = await stocat();
+  assert(JSON.parse(s.l).choice === 'necesar' && !s.s, `Strictul necesar: ${JSON.stringify(s)}`);
+
+  await page.click('[data-cookie-settings]');
+  await page.click('[data-consent="toate"]');
+  assert(JSON.parse((await stocat()).l).choice === 'toate', 'Acceptarea nu e salvată');
+  assert(!(await ctx.cookies()).length, 'Site-ul a pus cookie-uri nedeclarate');
+}, { fresh: true });
+
+/* 18. Pop-up */
+await test('Pop-up: apare la intrare după cookie-uri, la închidere rămâne eticheta din meniu, care îl redeschide', async (page) => {
+  const deschis = () => page.locator('[data-offer]').evaluate((d) => d.open);
+  await open(page);
+  await page.waitForTimeout(1200);
+  assert(!(await deschis()), 'Pop-up-ul a apărut înainte de alegerea cookie-urilor');
+  assert(!(await page.isVisible('[data-offer-pill]')), 'Eticheta a apărut înainte de pop-up');
+  await page.click('[data-consent="necesar"]');
+  await page.waitForSelector('[data-offer][open]', { timeout: 3000 });
+  await page.click('.offer__close');
+  assert(!(await deschis()), 'X nu închide pop-up-ul');
+  await page.waitForSelector('[data-offer-pill]:visible');
+  await page.click('[data-offer-pill]');
+  await page.waitForSelector('[data-offer][open]');
+  await page.keyboard.press('Escape');
+  assert(!(await deschis()), 'Escape nu închide pop-up-ul');
+  await page.reload({ waitUntil: 'networkidle' });
+  await page.waitForTimeout(1200);
+  assert(!(await deschis()), 'Pop-up-ul a apărut a doua oară');
+  assert(await page.isVisible('[data-offer-pill]'), 'Eticheta nu rămâne după reîncărcare');
+  await page.click('[data-offer-pill]');
+  await page.waitForSelector('[data-offer][open]');
+  await page.click('[data-offer-cta]');
+  await page.waitForTimeout(900);
+  assert((await page.inputValue('#f-message')).includes('analiza gratuită'), 'Oferta nu completează mesajul');
+  assert(await page.evaluate(() => document.activeElement.id === 'f-name'), 'Cursorul nu e în formular');
+}, { fresh: true });
+
+/* 19. Pagini legale */
+await test('Pagini legale: se deschid din subsol, fără texte provizorii, cu setări cookies', async (page) => {
+  for (const [href, titlu] of [['/confidentialitate.html', 'Politica de confidențialitate'], ['/cookies.html', 'Politica de cookies'], ['/termeni.html', 'Termeni și condiții']]) {
+    await open(page);
+    await page.click(`.footer a[href="${href}"]`);
+    await page.waitForLoadState('networkidle');
+    assert((await page.textContent('h1')) === titlu, `Pagina ${href} nu are titlul corect`);
+    const left = await page.evaluate(() => document.body.innerHTML.match(/__[A-Z_]+__/g));
+    assert(!left, `Texte provizorii pe ${href}: ${left}`);
+    await page.click('.legal__foot [data-cookie-settings]');
+    assert(await page.isVisible('[data-cookies]'), `Setările cookies nu merg pe ${href}`);
+  }
+});
 
 await browser.close();
 const failed = results.filter((r) => !r.ok);
