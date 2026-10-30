@@ -158,8 +158,9 @@ function initMotion() {
     const words = [...p.children];
     scroll((progress) => {
       const reached = progress * (words.length + 6);
-      words.forEach((w, i) => { w.style.opacity = Math.min(1, Math.max(0.3, (reached - i) / 6)); });
-    }, { target: p, offset: ['start 88%', 'end 62%'] });
+      // cât timp textul e sub ecran rămâne complet vizibil; se estompează abia când intră
+      words.forEach((w, i) => { w.style.opacity = progress === 0 ? '' : Math.min(1, Math.max(0.3, (reached - i) / 6)); });
+    }, { target: p, offset: ['start 100%', 'end 62%'] });
   });
 
   // pozele se dezvăluie de la stânga la dreapta; observăm cadrul, nu poza ascunsă
