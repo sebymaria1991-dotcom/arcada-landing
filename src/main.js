@@ -14,6 +14,10 @@ function initNav() {
   const list = document.querySelector('[data-bubble-nav]');
   const bubble = list?.querySelector('.menu__bubble');
   const links = [...(list?.querySelectorAll('a') || [])];
+  links.forEach((a, i) => {
+    a.style.setProperty('--i', i);
+    a.innerHTML = `<span class="roll"><span>${a.textContent}</span><span aria-hidden="true">${a.textContent}</span></span>`;
+  });
 
   const setOpen = (open) => {
     menu.toggleAttribute('data-open', open);
@@ -24,6 +28,17 @@ function initNav() {
       menu.querySelector('a')?.focus();
     }
   };
+  // meniul dispare când cobori și revine când urci
+  let lastY = window.scrollY;
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (Math.abs(y - lastY) < 6) return;
+    const open = burger?.getAttribute('aria-expanded') === 'true';
+    nav.classList.toggle('is-hidden', y > lastY && y > nav.offsetHeight * 2 && !open && !nav.contains(document.activeElement));
+    lastY = y;
+  }, { passive: true });
+  nav.addEventListener('focusin', () => nav.classList.remove('is-hidden'));
+
   burger?.addEventListener('click', () => setOpen(burger.getAttribute('aria-expanded') !== 'true'));
   menu?.addEventListener('click', (e) => { if (e.target.closest('a')) setOpen(false); });
   document.addEventListener('keydown', (e) => {
@@ -88,6 +103,11 @@ function initMotion() {
   animate('[data-hero]', { opacity: [0, 1], y: [16, 0] }, { duration: 0.7, delay: stagger(0.09, { startDelay: 0.25 }), ease: EASE });
   animate('.hl', { backgroundSize: ['0% 100%', '100% 100%'] }, { duration: 0.8, delay: 0.75, ease: EASE });
 
+  // meniul coboară la intrare, iar linkurile apar pe rând
+  if (window.matchMedia('(min-width: 1040px)').matches) {
+    animate('.menu__list li:not(.menu__bubble), .menu__cta', { opacity: [0, 1], y: [-10, 0] }, { duration: 0.6, delay: stagger(0.06, { startDelay: 0.35 }), ease: EASE });
+  }
+
   // bara de progres de sus urmărește derularea
   scroll(animate('[data-progress]', { scaleX: [0, 1] }, { ease: 'linear' }));
 
@@ -95,13 +115,75 @@ function initMotion() {
   document.querySelectorAll('[data-words]').forEach((title) => {
     const words = title.textContent.trim().split(/\s+/);
     title.setAttribute('aria-label', title.textContent.trim());
-    title.innerHTML = words.map((w) => `<span class="w" aria-hidden="true"><span>${w}</span></span>`).join(' ');
+    const marked = (title.dataset.hl || '').split(/\s+/).filter(Boolean);
+    const start = words.join(' ').indexOf(marked.join(' '));
+    const from = marked.length && start >= 0 ? words.join(' ').slice(0, start).split(' ').length - 1 : -1;
+    title.innerHTML = words.map((w, i) => {
+      const mark = from >= 0 && i >= from && i < from + marked.length;
+      return `<span class="w${mark ? ' is-mark' : ''}" aria-hidden="true"><span>${w}</span></span>`;
+    }).join(' ');
     const inner = title.querySelectorAll('.w > span');
     animate(inner, { y: '110%' }, { duration: 0 });
     inView(title, () => {
       animate(inner, { y: '0%' }, { duration: 0.7, delay: stagger(0.035), ease: EASE });
+      const marks = title.querySelectorAll('.is-mark > span');
+      if (marks.length) animate(marks, { backgroundSize: ['0% .13em', '100% .13em'] }, { duration: 0.55, delay: stagger(0.12, { startDelay: 0.55 }), ease: EASE });
     }, { amount: 0.4 });
   });
+
+  // etichetele se „decodează”, literă cu literă, ca pe o fișă tehnică
+  const LITERE = 'ABCDEFGHIKLMNOPRSTUVZ%#/';
+  document.querySelectorAll('.tag').forEach((tag) => {
+    const text = tag.textContent;
+    tag.setAttribute('aria-label', text);
+    inView(tag, () => {
+      tag.style.width = `${tag.getBoundingClientRect().width}px`;
+      tag.style.whiteSpace = 'nowrap';
+      animate(0, text.length, {
+        duration: Math.min(0.9, 0.3 + text.length * 0.03),
+        ease: 'linear',
+        onUpdate: (n) => {
+          const done = Math.floor(n);
+          tag.textContent = text.slice(0, done) + [...text.slice(done)].map((ch) => (ch === ' ' ? ' ' : LITERE[Math.floor(Math.random() * LITERE.length)])).join('');
+        },
+        onComplete: () => { tag.textContent = text; tag.style.width = ''; tag.style.whiteSpace = ''; },
+      });
+    }, { amount: 0.6 });
+  });
+
+  // textele lungi se aprind cuvânt cu cuvânt, odată cu derularea
+  document.querySelectorAll('.about .section-head__lead, .problem .section-head__lead').forEach((p) => {
+    if (p.children.length) return;
+    p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span>${w}</span>`).join(' ');
+    const words = [...p.children];
+    scroll((progress) => {
+      const reached = progress * (words.length + 6);
+      words.forEach((w, i) => { w.style.opacity = Math.min(1, Math.max(0.3, (reached - i) / 6)); });
+    }, { target: p, offset: ['start 88%', 'end 62%'] });
+  });
+
+  // pozele se dezvăluie de la stânga la dreapta; observăm cadrul, nu poza ascunsă
+  document.querySelectorAll('[data-wipe]').forEach((fig) => {
+    const img = fig.querySelector('img');
+    img.style.clipPath = 'inset(0 100% 0 0)';
+    inView(fig, () => {
+      animate(img, { clipPath: ['inset(0 100% 0 0)', 'inset(0 0% 0 0)'] }, { duration: 1.1, ease: EASE });
+    }, { amount: 0.25 });
+  });
+
+  // arcada comisionului urcă, iar procentul numără până la valoarea lui
+  const fee = document.querySelector('.fee__value');
+  if (fee) {
+    const parts = fee.textContent.trim().match(/^(\d+)(.*)$/);
+    fee.style.visibility = 'hidden';
+    inView(fee, () => {
+      fee.style.visibility = '';
+      animate(fee, { y: ['100%', '0%'] }, { duration: 0.9, ease: EASE });
+      if (parts) {
+        animate(0, Number(parts[1]), { duration: 1.1, delay: 0.25, ease: 'easeOut', onUpdate: (n) => { fee.textContent = `${Math.round(n)}${parts[2]}`; } });
+      }
+    }, { amount: 0 });
+  }
 
   // elementele apar la derulare, în cascadă față de frații lor
   inView('[data-reveal]', (el) => {
@@ -130,6 +212,36 @@ function initMotion() {
       });
     }, { target: timeline, offset: ['start 70%', 'end 65%'] });
   }
+}
+
+/* Banda cu tipuri de locuințe: se repetă fără cusătură și poate fi oprită */
+function initMarquee() {
+  const box = document.querySelector('[data-marquee]');
+  const toggle = document.querySelector('[data-marquee-toggle]');
+  if (!box || !toggle || reduceMotion.matches) return;
+  const track = box.querySelector('.city__strip');
+  const cards = [...track.children];
+  for (let round = 0; round < 3; round += 1) {
+    cards.forEach((card) => {
+      const copy = card.cloneNode(true);
+      copy.setAttribute('aria-hidden', 'true');
+      copy.inert = true;
+      copy.querySelectorAll('img').forEach((img) => { img.alt = ''; });
+      track.append(copy);
+    });
+  }
+  // pozele din bandă se încarcă din timp, ca să nu apară goluri când intră pe ecran
+  inView(box, () => { track.querySelectorAll('img').forEach((img) => { img.loading = 'eager'; }); }, { margin: '400px 0px' });
+  track.classList.add('is-running');
+  toggle.hidden = false;
+  const label = toggle.querySelector('.sr-only');
+  const icon = toggle.querySelector('use');
+  toggle.addEventListener('click', () => {
+    const paused = box.classList.toggle('is-paused');
+    toggle.setAttribute('aria-pressed', String(paused));
+    label.textContent = paused ? 'Pornește imaginile' : 'Pune imaginile pe pauză';
+    icon.setAttribute('href', `/icons.svg#i-${paused ? 'play' : 'pause'}`);
+  });
 }
 
 /* Schița interactivă: punctele, graficul și straturile din desen sunt legate */
@@ -227,7 +339,13 @@ function initOffer() {
   const open = () => {
     if (dialog.open) return;
     dialog.showModal();
-    if (!reduceMotion.matches) animate(dialog, { opacity: [0, 1], y: [28, 0], scale: [0.97, 1] }, { duration: 0.5, ease: EASE });
+    if (reduceMotion.matches) return;
+    // panoul sare ușor, arcada se desenează, iar conținutul apare pe rând
+    animate(dialog, { opacity: [0, 1], y: [48, 0], scale: [0.92, 1] }, { type: 'spring', stiffness: 240, damping: 22 });
+    animate(dialog.querySelectorAll('.offer__arch path'), { strokeDashoffset: [1, 0] }, { duration: 1.3, delay: stagger(0.2), ease: EASE });
+    animate(dialog.querySelectorAll('.offer__top > :not(svg), .offer__lead, .offer__list li, .offer__cta, .offer__later'), { opacity: [0, 1], y: [16, 0] }, { duration: 0.5, delay: stagger(0.07, { startDelay: 0.15 }), ease: EASE });
+    // bifele se pun una câte una
+    animate(dialog.querySelectorAll('.offer__list .ico'), { scale: [0, 1.3, 1] }, { duration: 0.45, delay: stagger(0.14, { startDelay: 0.6 }), ease: EASE });
   };
   const showPill = () => {
     if (!pill.hidden) return;
@@ -264,6 +382,7 @@ function initOffer() {
 initConsent();
 initNav();
 initMotion();
+initMarquee();
 initPlan();
 initVideo();
 initWhatsAppPulse();
